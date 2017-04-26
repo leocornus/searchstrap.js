@@ -1,0 +1,34 @@
+{
+  "name": "searchstrap.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/leocornus/searchstrap.js",
+  "description": "comprehensive JavaScript sdk for search",
+  "main": "src/searchstrap.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "search",
+    "sdk"
+  ],
+  "authors": [
+    "Sean Chen <sean.chen@leocorn.com>"
+  ],
+  "license": "GPLv2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.6",
+    "font-awesome": "~4.5.0"
+  },
+  "devDependencies": {
+    "lightbox2": "~2.8.2",
+    "arm-galleria": "~1.4.3"
+  }
+}
