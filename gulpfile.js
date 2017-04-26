@@ -13,8 +13,8 @@ var gls = require('gulp-live-server');
 // the simplest express static server.
 //var liveServer = gls.static('.', 8900);
 // using a simple javascript file for express server.
-var liveServer = gls.new('test/express.js');
-gulp.task('express-app', 'TBD: Load the local Express server', function() {
+var liveServer = gls.new('test/express/express.js');
+gulp.task('express-app', 'Load the local Express server', function() {
 
     liveServer.start();
 });
