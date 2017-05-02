@@ -1,0 +1,184 @@
+<html no-ng-app="ssDemo">
+  <head>
+    <title>Demo Special Search Page</title>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+    <link rel='stylesheet' href='/bower_components/jquery-ui/themes/base/jquery-ui.css'/>
+    <link rel='stylesheet' href='/bower_components/jquery-ui-bootstrap/jquery.ui.theme.css'/>
+
+    <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='/bower_components/jquery-ui/jquery-ui.min.js'></script>
+    <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src='/bower_components/angular/angular.min.js'></script>
+
+    <script src='/src/search/searchStrap.js'></script>
+    <script src='/src/search/template-acronyms-circle.js'></script>
+    <script src='/src/search/template-acronyms-list.js'></script>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src='https://cdn.rawgit.com/leocornus/leocornus-visualdata/v0.0.6/src/zoomable-circles.js'></script>
+
+<style>
+/**
+ * styles needed for zoomable circles.
+ */
+.node {
+    cursor: pointer;
+}
+
+.node:hover {
+    stroke: #000;
+    stroke-width: 1.5px;
+}
+
+.node--leaf {
+    fill: grey;
+}
+
+.label {
+    font: 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-anchor: middle;
+    font-weight: bold;
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+}
+
+.label, .node--root, .node--leaf, use {
+    pointer-events: none;
+}
+
+/**
+ * for the input clear button.
+ */
+::-ms-clear {
+  display: none;
+}
+
+.form-control-clear {
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
+}
+  </style>
+    <script>
+// this will replace the code in controller.js
+//var simpleTest = angular.module('ssDemo', []);
+
+jQuery(document).ready(function($) {
+
+$('.has-clear input[type="text"]').on('input propertychange', function() {
+  var $this = $(this);
+  // any input will make the visible has value: true
+  var visible = Boolean($this.val());
+  $this.siblings('.form-control-clear').toggleClass('hidden', !visible);
+}).trigger('propertychange');
+
+$('.form-control-clear').click(function() {
+  $(this).siblings('input[type="text"]').val('')
+    .trigger('propertychange').focus();
+});
+
+    $('#search-input').searchStrap({
+        //searchUrl: 'http://gsddtovsdvap014.cihs.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
+        searchUrl: 'http://intra.net.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
+        //searchUrl: '/advancedsearch',
+        // magic numbers: 3, 7, 19, 37
+        itemsPerPage: 31,
+        // we don't need search button here.
+        fq: 'site: revenue AND keywords: "Staffing Announcements"',
+        //fq: 'site: wiki AND keywords: Acronyms',
+        //fq: 'keywords: "User Profile"',
+        //searchButton: 'sizing-addon',
+        facet: {
+            facetField: ['authors']
+        },
+        resultSelector: '#result-list',
+        resultTemplate: buildAcronymsCircles,
+        autoReload: false
+    });
+});
+
+var simpleColumnBuilder = function(item) {
+
+    var panel = '<div class="col-sm-3">' + 
+        '<h2><a href="' + item['url'] + '">' +
+        item['title'] + '</a></h2>' +
+        '<p>' + item['description'] + '</p>' + 
+        '</div>';
+    return panel;
+};
+    </script>
+  </head>
+
+  <body>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron" style="padding-bottom:0px">
+      <div class="container">
+        <h1>
+          <img src="https://i.cbc.ca/1.2311790.1383277423!/httpImage/image.jpg_gen/derivatives/original_300/to-trillium-new.jpg" alt="..." class="img-rounded" style="width:74px">
+          <span class="text-success">OPS Acronyms</span>
+        </h1>
+        <p>The following is a partial list of acronyms used throughout the <a href="http://intra.net.gov.on.ca/wiki/Ontario_Public_Service">Ontario Public Service</a>. This list is incomplete, and you can help!
+        </p>
+<ul class="nav nav-pills">
+  <li role="presentation" class="active"><a href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</a></li>
+  <li role="presentation"><a href="/wiki/"><span class="glyphicon glyphicon-flash" aria-hidden="true"></span> Search Tips</a></li>
+  <li role="presentation">
+    <a href="/wiki/Category:Acronyms"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Create New</a>
+  </li>
+  <li class="pull-right" role="presentation"><a href="/wiki/"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> How we build this page</a></li>
+</ul>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Search bar -->
+      <div class="container container-fluid bg-muted">
+      <div class="row" id="search-bar">
+        <div class="col-md-2">
+        </div>
+
+        <div class="col-md-8">
+          <div class="input-group input-group-lg"
+               role="group" aria-label="...">
+            <span class="input-group-addon" id="search-button">
+              <i class="fa fa-search text-primary"></i>
+            </span>
+            <div class="form-group form-group-lg has-feedback has-clear">
+              <input type="text" class="form-control"
+                     placeholder="Find Acronyms"
+                     id="search-input"
+                     aria-describedby="sizing-addon"/>
+              <span class="form-control-clear text-primary
+                           glyphicon glyphicon-remove
+                           form-control-feedback hidden"></span>
+            </div>
+          </div>
+          <div class="text-muted text-center h4" id="search-info">
+            <h2>Loading...</h2>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+        </div>
+      </div>
+      </div>
+
+      <!-- Example row of columns -->
+      <div class="container container-fluid" id="result-list">
+      </div>
+
+      <div class="container container-fluid">
+      <hr>
+      <footer>
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+      <div>
+        <textarea width="100%" id="jsonstring"></textarea>
+      </div>
+      </div>
+    </div> <!-- /container -->
+  </body>
+</html>
