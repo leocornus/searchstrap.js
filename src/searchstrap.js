@@ -33,6 +33,11 @@
         // default is empty
         fq: '',
 
+        /**
+         * set the default sort.
+         */
+        sort: 'lastModifiedDate desc',
+
         // jQuery selector for the the search result section.
         resultSelector: '#search-result',
 
@@ -216,6 +221,7 @@
                 term: searchQuery.term,
                 start: searchQuery.start,
                 perPage: self.settings.itemsPerPage,
+                sort: self.settings.sort,
                 // facet
                 facet: JSON.stringify(self.settings.facet),
                 fq: self.settings.fq
