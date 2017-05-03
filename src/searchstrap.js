@@ -8,7 +8,8 @@
 
     // plugin name and default values.
     var pluginSearchStrap = "searchStrap";
-    // set the default values
+
+    // set the default values / options.
     var defaults = {
         // the url endpoint for search.
         searchUrl : '/search',
@@ -75,6 +76,21 @@
         this._name = pluginSearchStrap;
         this.init();
     }
+
+    // add the plugin to the jQuery chain.
+    $.fn[pluginSearchStrap] = function(options) {
+
+        // return to maintain the chain.
+        return this.each(function() {
+            // check the local storage index for the current
+            // element.
+            if(!$.data(this, "plugin_" + pluginSearchStrap)) {
+                // no plugin created yet, let create a new one.
+                $.data(this, "plugin_" + pluginSearchStrap, 
+                       new Plugin(this, options));
+            }
+        });
+    };
 
     // use extend method to avoid Plugin prototype confilcts.
     $.extend(Plugin.prototype, {
@@ -852,19 +868,5 @@
             this.updateBrowserUrl(query);
         }
     });
-
-    $.fn[pluginSearchStrap] = function(options) {
-
-        // return to maintain the chain.
-        return this.each(function() {
-            // check the local storage index for the current
-            // element.
-            if(!$.data(this, "plugin_" + pluginSearchStrap)) {
-                // no plugin created yet, let create a new one.
-                $.data(this, "plugin_" + pluginSearchStrap, 
-                       new Plugin(this, options));
-            }
-        });
-    };
 
 })(jQuery);
