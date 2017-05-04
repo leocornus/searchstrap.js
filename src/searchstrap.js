@@ -128,6 +128,7 @@
             // prepare the query to perform the initial search
             var searchQuery =
                 this.prepareSearchQuery(searchTerm, start);
+            // the initial search.
             self.search(searchQuery);
 
             // hook the click event to search button.
@@ -249,7 +250,8 @@
             // prepare the query to perform the initial search
             // this is a new search, reset start to 1
             var query = this.prepareSearchQuery(term, 1);
-            this.search(query);
+            // no need search again if we will reload the page.
+            //this.search(query);
 
             // update the brwoser url to
             // reflect the search input field
