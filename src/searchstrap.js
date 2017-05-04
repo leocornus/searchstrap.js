@@ -263,10 +263,17 @@
 
             var reload =
                 typeof reload === 'undefined' ? false : true;
-            // build the new url.
-            url = '?' + this.settings.queryName + 
-                  '=' + encodeURIComponent(searchQuery.term) +
-                  '&start=' + searchQuery.start;
+            // Check first, if the query term is empty,
+            // we don't need the query parameter!
+            // build the search term parameter.
+            var query = [];
+            if(searchQuery.term.length > 0) {
+                query.push(this.settings.queryName +
+                    '=' + encodeURIComponent(searchQuery.term));
+            }
+            // add the start parameter.
+            query.push('start=' + searchQuery.start);
+            var url = '?' + query.join('&');
 
             // the push state will keep the url in history,
             // so the back will remember it.
