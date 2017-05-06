@@ -1,7 +1,7 @@
 /**
  * jQuery plugin to present a simple search function.
  *
- *   jQuery('#searn-input-id').searchStrap();
+ *   jQuery('#div-id').searchStrap();
  */
 
 ;(function($) {
@@ -105,21 +105,28 @@
 
             var self = this;
 
+            // build the search box.
+            var searchBox = self.buildSearchBox();
+            self.$element.html('').append(searchBox);
+            self.$inputBox = self.$element.find('input');
+
             // we will get search term from query
+            // TODO: more are comming, facets, sort, etc.
             var paramName = self.settings.queryName;
             var queryParams = self.getUrlVars();
 
+            // handle search term.
             // set to empty string if no query parameter found.
             var searchTerm = paramName in queryParams ?
                              queryParams[paramName] : '';
             searchTerm = decodeURIComponent(searchTerm);
             // set the initial value for input box
-            this.$element.val(searchTerm);
+            this.$inputBox.val(searchTerm);
             // trigger the propertychange event. 
             // some function depends on this event.
             // e.g., the clear button using Bootstrap feedback icon
             // will depen on this event.
-            this.$element.trigger('propertychange');
+            this.$inputBox.trigger('propertychange');
 
             // set the start to 1 if we could not find it.
             var start = 'start' in queryParams ?
@@ -140,7 +147,7 @@
             });
 
             // hook the key press event.
-            this.$element.on('keypress', function(event) {
+            this.$inputBox.on('keypress', function(event) {
 
                 //console.log(event);
                 // only handle the enter key.
@@ -151,7 +158,7 @@
 
             if(self.settings.autoReload) {
                 // hook the key up event for the input field.
-                self.$element.on('keyup', function(event) {
+                self.$inputBox.on('keyup', function(event) {
 
                     var term = $(this).val();
                     if (term.length >= 0) {
@@ -246,7 +253,7 @@
          */
         handleButtonClick : function() {
 
-            var term = this.$element.val();
+            var term = this.$inputBox.val();
             // prepare the query to perform the initial search
             // this is a new search, reset start to 1
             var query = this.prepareSearchQuery(term, 1);
@@ -340,6 +347,38 @@
                                       currentPage, totalPages, 
                                       perPage);
             });
+        },
+
+        /**
+         * the default builder to build search input box
+         * this will depend on Bootstap
+         */
+        buildSearchBox: function() {
+
+            var searchBox = 
+'<div class="input-group input-group-lg"' +
+'     role="group" aria-label="...">' +
+'  <div class="form-group form-group-lg has-feedback has-clear">' +
+'    <input type="text" class="form-control"' +
+'           placeholder="Find Acronyms"' +
+'           id="search-input"' +
+'           aria-describedby="sizing-addon"/>' +
+'    <span class="form-control-clear text-danger' +
+'                 glyphicon glyphicon-remove' +
+'                 form-control-feedback hidden"></span>' +
+'  </div>' +
+'  <span class="input-group-addon" id="search-button"' +
+'        style="cursor: pointer">' +
+'    <span class="glyphicon glyphicon-search ' +
+'                 text-primary"></span> Search' +
+'  </span>' +
+'</div>' +
+// the infor bar.
+'<div class="text-muted h4" id="search-info">' +
+'  <h2>Loading...</h2>' +
+'</div>';
+
+            return searchBox;
         },
 
         /**
