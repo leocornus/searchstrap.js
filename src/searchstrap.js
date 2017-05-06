@@ -121,7 +121,9 @@
                              queryParams[paramName] : '';
             searchTerm = decodeURIComponent(searchTerm);
             // set the initial value for input box
-            this.$inputBox.val(searchTerm);
+            self.$inputBox.val(searchTerm);
+            // show the glyphicon remove.
+            self.toggleRemoveIcon();
             // trigger the propertychange event. 
             // some function depends on this event.
             // e.g., the clear button using Bootstrap feedback icon
@@ -147,7 +149,7 @@
             });
 
             // hook the key press event.
-            this.$inputBox.on('keypress', function(event) {
+            self.$inputBox.on('keypress', function(event) {
 
                 //console.log(event);
                 // only handle the enter key.
@@ -156,10 +158,12 @@
                 }
             });
 
-            if(self.settings.autoReload) {
-                // hook the key up event for the input field.
-                self.$inputBox.on('keyup', function(event) {
+            // hook the key up event for the input field.
+            self.$inputBox.on('keyup', function(event) {
 
+                self.toggleRemoveIcon();
+
+                if(self.settings.autoReload) {
                     var term = $(this).val();
                     if (term.length >= 0) {
                         // prepare the query to perform 
@@ -167,8 +171,8 @@
                         var query = self.prepareSearchQuery(term, 1);
                         self.search(query);
                     }
-                });
-            }
+                }
+            });
         },
 
         /**
@@ -379,6 +383,23 @@
 '</div>';
 
             return searchBox;
+        },
+
+        /**
+         * toggle remove icon.
+         */
+        toggleRemoveIcon: function() {
+
+            var self = this;
+
+            if(self.$inputBox.val()) {
+                // show the glyphicon remove.
+                self.$element.find('.glyphicon-remove').
+                     removeClass('hidden');
+            } else {
+                self.$element.find('.glyphicon-remove').
+                     addClass('hidden');
+            }
         },
 
         /**
