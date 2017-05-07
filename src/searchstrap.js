@@ -107,8 +107,6 @@
 
             // build the search box.
             var searchBox = self.buildSearchBox();
-            self.$element.html('').append(searchBox);
-            self.$inputBox = self.$element.find('input');
 
             // we will get search term from query
             // TODO: more are comming, facets, sort, etc.
@@ -359,6 +357,8 @@
          */
         buildSearchBox: function() {
 
+            var self = this;
+
             var searchBox = 
 '<div class="input-group input-group-lg"' +
 '     role="group" aria-label="...">' +
@@ -382,7 +382,19 @@
 '  <h2>Loading...</h2>' +
 '</div>';
 
-            return searchBox;
+            self.$element.html('').append(searchBox);
+            self.$inputBox = self.$element.find('input');
+
+            // hook the clik event on the remove icon.
+            self.$element.find('.glyphicon-remove')
+                .on('click', function(event) {
+
+                self.$inputBox.val('');
+                // hide the remove icon.
+                $(this).addClass('hidden');
+                // reload page.
+                self.handleButtonClick();
+            });
         },
 
         /**
