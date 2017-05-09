@@ -99,7 +99,6 @@ var userProfilePanel = function(profile) {
     // thumbnail panel
     var panel =
 '<div class="thumbnail" style="border: 0px">' +
-//'<div>' +
 '  <a href="' + profile['url'] + '">' +
 '  <img src="' + profile['image'] + 
             '" class="img-circle" width=100% alt="' + 
@@ -108,6 +107,22 @@ var userProfilePanel = function(profile) {
 '  <div class="caption">' +
 '    <h3><a href="' + profile['url'] + '">' + profile['title'] + 
 '</a></h3>' +
+'    <p>' + desc +'</p>' +
+'  </div>' +
+'</div>';
+
+    // using the pull-left try to make the text wrap around the
+    // image.
+    panel =
+'<div>' +
+'  <a class="pull-left" href="' + profile['url'] + '">' +
+'  <img src="' + profile['image'] + 
+            '" class="img-circle" width=86 alt="' + 
+            profile['title'] + '"/>' +
+'  </a>' +
+'  <div>' +
+'    <h4><a href="' + profile['url'] + '">' + profile['title'] + 
+'</a></h4>' +
 '    <p>' + desc +'</p>' +
 '  </div>' +
 '</div>';
