@@ -96,15 +96,24 @@ var userProfilePanel = function(profile) {
     // try to remove some wiki markups.
     var desc = profile['content'];
 
-    var panel = '<div class="col-sm-3">' +
+    // thumbnail panel
+    var panel =
 '<div class="thumbnail" style="border: 0px">' +
-'  <img src="' + profile['image'] + '" width=90% alt="' + profile['title'] + '"/>' +
+//'<div>' +
+'  <a href="' + profile['url'] + '">' +
+'  <img src="' + profile['image'] + 
+            '" class="img-circle" width=100% alt="' + 
+            profile['title'] + '"/>' +
+'  </a>' +
 '  <div class="caption">' +
-'    <h3><a href="' + profile['url'] + '">' + profile['title'] + '</a></h3>' +
+'    <h3><a href="' + profile['url'] + '">' + profile['title'] + 
+'</a></h3>' +
 '    <p>' + desc +'</p>' +
 '  </div>' +
-'</div>' +
-        '</div>';
+'</div>';
+
+    // add the column div.
+    panel = '<div class="col-sm-3">' + panel + '</div>'
 
     return panel;
 };
