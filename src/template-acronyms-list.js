@@ -31,7 +31,8 @@ var buildAcronymsList = function(docs, currentQuery, total,
     var colQueue =[];
     for(i = 0; i < docs.length; i++) {
         var acronym = docs[i];
-        var panel = acronymPanelStripper(acronym);
+        //var panel = acronymPanelStripper(acronym);
+        var panel = userProfilePanel(acronym);
         colQueue.push(panel);
         // i count from 0
         // 6 acronyms for a row
@@ -81,5 +82,29 @@ var acronymPanelStripper = function(acronym) {
         acronym['title'] + '</a></h2>' +
         '<p><ul class="list-group">' + text + '</li></ul></p>' + 
         '</div>';
+    return panel;
+};
+
+/**
+ * builder function to build the user profile by using the 
+ * Bootstrap thumbnail.
+ */
+var userProfilePanel = function(profile) {
+
+   console.log(profile);
+
+    // try to remove some wiki markups.
+    var desc = profile['content'];
+
+    var panel = '<div class="col-sm-3">' +
+'<div class="thumbnail" style="border: 0px">' +
+'  <img src="' + profile['image'] + '" width=90% alt="' + profile['title'] + '"/>' +
+'  <div class="caption">' +
+'    <h3><a href="' + profile['url'] + '">' + profile['title'] + '</a></h3>' +
+'    <p>' + desc +'</p>' +
+'  </div>' +
+'</div>' +
+        '</div>';
+
     return panel;
 };
