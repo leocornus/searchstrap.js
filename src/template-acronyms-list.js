@@ -1,7 +1,7 @@
 /**
  * build the Acronyms list, which will have 6 columns
  */
-var buildAcronymsList = function(docs, currentQuery, total, 
+var buildAcronymsList = function($result, docs, currentQuery, total, 
                             currentPage, totalPages, pagination) {
 
     var resultSummary = '';
@@ -24,8 +24,7 @@ var buildAcronymsList = function(docs, currentQuery, total,
     $('#search-info').html(resultSummary);
 
     // build a 6 columns to show 
-    var result = $("#result-list");
-    result.html("");
+    $result.html("");
 
     //result.append('<div>' + pagination + '</div>');
     var colQueue =[];
@@ -38,7 +37,7 @@ var buildAcronymsList = function(docs, currentQuery, total,
         // 6 acronyms for a row
         var ready2Row = (i + 1) % 4;
         if(ready2Row == 0) {
-            result.append('<div class="row">' +
+            $result.append('<div class="row">' +
                 colQueue.join("") + '</div>');
             // reset the queue.
             colQueue = [];
@@ -49,15 +48,15 @@ var buildAcronymsList = function(docs, currentQuery, total,
     if(colQueue.length > 0) {
 
         // append to the last row.
-        result.append('<div class="row">' +
+        $result.append('<div class="row">' +
             colQueue.join(" ") +
             '</div>');
     }
 
     // add the pagination at the bottom too.
-    result.append('<div>' + pagination + '</div>');
+    $result.append('<div>' + pagination + '</div>');
 
-    return result;
+    return $result;
 };
 
 /**

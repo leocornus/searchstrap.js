@@ -1,8 +1,8 @@
 /**
  * build the Acronyms in zoomable circles. 
  */
-var buildAcronymsCircles = function(docs, currentQuery, total, 
-                            currentPage, totalPages, pagination) {
+var buildAcronymsCircles = function($result, docs, currentQuery,
+                        total, currentPage, totalPages, pagination) {
 
     var resultSummary = '';
     if(total > 0) {
@@ -23,9 +23,8 @@ var buildAcronymsCircles = function(docs, currentQuery, total,
     }
     $('#search-info').html(resultSummary);
 
-    var result = $("#result-list");
-    result.html("");
-    result.append('<div id="circles"></div>');
+    $result.html("");
+    $result.append('<div id="circles"></div>');
 
     // get ready the data.
     var circles =[];
@@ -64,7 +63,7 @@ var buildAcronymsCircles = function(docs, currentQuery, total,
     $('#circles').zoomableCircles({}, jsonData);
 
     // add the pagination at the bottom too.
-    result.append('<div>' + pagination + '</div>');
+    $result.append('<div>' + pagination + '</div>');
 
-    return result;
+    return $result;
 };

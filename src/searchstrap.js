@@ -325,10 +325,10 @@
                 self.buildPaginationDots(currentPage, totalPages);
 
             // build the result page based on the result template.
-            var $result;
+            var $result = $(this.settings.resultSelector);
             if (self.settings.resultTemplate) {
-                $result = self.settings.resultTemplate(data.docs, 
-                        currentQuery, total, 
+                $result = self.settings.resultTemplate($result,
+                        data.docs, currentQuery, total, 
                         currentPage, totalPages, pagination);
             } else {
                 // using the default template.
