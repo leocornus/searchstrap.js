@@ -13,6 +13,8 @@
     var defaults = {
         // the url endpoint for search.
         searchUrl : '/search',
+        // the placeholder for search input box.
+        placeholder: 'Find ...',
         // the kkkkkk
         itemsPerPage: 10,
         // id for the search button.
@@ -364,7 +366,7 @@
 '     role="group" aria-label="...">' +
 '  <div class="form-group form-group-lg has-feedback has-clear">' +
 '    <input type="text" class="form-control"' +
-'           placeholder="Find Acronyms"' +
+'           placeholder="' + self.settings.placeholder + '"' +
 '           id="search-input"' +
 '           aria-describedby="sizing-addon"/>' +
 '    <span class="form-control-clear text-danger' +
