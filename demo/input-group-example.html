@@ -1,0 +1,39 @@
+<!-- here are the styles for input gorup -->
+<style>
+/**
+ * for the input clear button.
+ */
+::-ms-clear {
+  display: none;
+}
+
+.form-control-clear {
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
+}
+</style>
+
+
+<!-- here is the HTML for input group -->
+<div class="input-group input-group-lg"
+     role="group" aria-label="...">
+  <div class="form-group form-group-lg has-feedback has-clear">
+    <input type="text" class="form-control"
+           placeholder="Find Acronyms"
+           id="search-input"
+           aria-describedby="sizing-addon"/>
+    <span class="form-control-clear text-primary
+                 glyphicon glyphicon-remove
+                 form-control-feedback hidden"></span>
+  </div>
+  <span class="input-group-addon" id="search-button"
+        style="cursor: pointer">
+    <span class="glyphicon glyphicon-search 
+                 text-primary"></span> Search
+  </span>
+</div>
+<!-- quick summary for search results -->
+<div class="text-muted h4" id="search-info">
+  <h2>Loading...</h2>
+</div> 
