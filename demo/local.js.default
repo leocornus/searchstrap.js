@@ -1,4 +1,9 @@
 // the default local.js file
+// The file is used to customize the local settings.
+// Search URL might be differenct in your local development env.
+//
+// simply copy this file to file name local.js,
+// and then update the searchUrl to the one you prefer.
 var localSettings = {
   searchUrl: '/advancedsearch'
 };
