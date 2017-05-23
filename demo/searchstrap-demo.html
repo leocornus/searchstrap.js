@@ -9,6 +9,7 @@
     <script src='/bower_components/jquery/dist/jquery.min.js'></script>
     <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
 
+    <script src='local.js'></script>
     <script src='/src/searchstrap.js'></script>
     <script src='/src/template-acronyms-circle.js'></script>
     <script src='/src/template-acronyms-list.js'></script>
@@ -76,23 +77,22 @@ $('.form-control-clear').click(function() {
 });
 
     $('#searchstrap').searchStrap({
-        //searchUrl: 'http://gsddtovsdvap014.cihs.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
-        searchUrl: 'http://intra.net.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
-        //searchUrl: '/advancedsearch',
+        searchUrl: localSettings.searchUrl,
+        //placeholder: "Find Acronyms",
         // magic numbers: 3, 7, 19, 37
-        itemsPerPage: 31,
+        itemsPerPage: 16,
         sort: 'lastModifiedDate desc',
         // we don't need search button here.
         //fq: 'site: revenue AND keywords: "Staffing Announcements"',
-        fq: 'site: wiki AND keywords: Acronyms',
-        //fq: 'keywords: "User Profile"',
+        //fq: 'site: wiki AND keywords: Acronyms',
+        fq: 'keywords: "User Profile"',
         //searchButton: 'sizing-addon',
         facet: {
             facetField: ['authors']
         },
         resultSelector: '#result-list',
-        //resultTemplate: buildAcronymsCircles,
-        resultTemplate: buildAcronymsList,
+        resultTemplate: buildAcronymsCircles,
+        //resultTemplate: buildAcronymsList,
         autoReload: false
     });
 });
@@ -122,7 +122,7 @@ var simpleColumnBuilder = function(item) {
   <li role="presentation" class="active"><a href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</a></li>
   <li role="presentation"><a href="/wiki/"><span class="glyphicon glyphicon-flash" aria-hidden="true"></span> Search Tips</a></li>
   <li role="presentation">
-    <a href="/wiki/Category:Acronyms"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Create New</a>
+    <a href=""><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Customization</a>
   </li>
   <li class="pull-right" role="presentation"><a href="/wiki/"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> How we build this page</a></li>
 </ul>

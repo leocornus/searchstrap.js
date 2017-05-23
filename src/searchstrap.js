@@ -324,8 +324,10 @@
             var pagination = totalPages <= 1 ? '' :
                 self.buildPaginationDots(currentPage, totalPages);
 
-            // build the result page based on the result template.
+            // here the result list DOM object.
             var $result = $(this.settings.resultSelector);
+
+            // build the result page based on the result template.
             if (self.settings.resultTemplate) {
                 $result = self.settings.resultTemplate($result,
                         data.docs, currentQuery, total, 
