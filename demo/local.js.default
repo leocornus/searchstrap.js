@@ -1,0 +1,4 @@
+// the default local.js file
+var localSettings = {
+  searchUrl: '/advancedsearch'
+};

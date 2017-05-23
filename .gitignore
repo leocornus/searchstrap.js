@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+# ignore the local.js file.
+local.js
+
 # Runtime data
 pids
 *.pid

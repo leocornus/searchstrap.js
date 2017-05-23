@@ -1,3 +1,0 @@
-var localSettings = {
-  searchUrl:"/advancedsearch"
-};
