@@ -4,6 +4,11 @@
 //
 // simply copy this file to file name local.js,
 // and then update the searchUrl to the one you prefer.
+//
+// we ignored the local.js file through .gitingore.
+// to show the status, you could use the command:
+//   $ git status --ignored
+//
 var localSettings = {
   searchUrl: '/advancedsearch'
 };
