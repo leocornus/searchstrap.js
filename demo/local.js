@@ -1,0 +1,3 @@
+var localSettings = {
+  searchUrl:"/advancedsearch"
+};
