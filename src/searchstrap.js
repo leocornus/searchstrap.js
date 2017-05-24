@@ -499,7 +499,25 @@
         /**
          * build the result filter panel.
          */
-        buildResultFilterPanel: function() {
+        buildResultFilterPanel: function(facets, currentQuery) {
+
+            var self = this;
+
+            // here the result list DOM object.
+            var $filter = $(self.settings.filterSelector);
+
+            // build the result page based on the result template.
+            if (self.settings.filterTemplate) {
+                $filter = self.settings.filterTemplate(self, $filter,
+                        facets, currentQuery);
+            } else {
+                // using the default template, in file
+                // templates/2cols.js
+                $filter = self.defaultResultFilter(self, $filter,
+                        facets, currentQuery);
+            }
+
+            return $filter;
         },
 
         /**
@@ -934,6 +952,38 @@
                   .append($ul).append(footer);
 
             return $panel;
+        },
+
+        /**
+         * the default search result filter panel.
+         */
+        defaultResultFilter: function(strap, $filter, facets, 
+                                      currentQuery) {
+        
+            // panel heading...
+            var heading = 
+                '<div class="panel-heading">' +
+                '  <strong>Search Filters</strong>' +
+                '</div>';
+        
+            var body = 
+                '<div class="panel-body">' +
+                '  LIST OF FILTERS.' +
+                '  <p></p>' +
+                '  In Tag Cloud' +
+                '</div>';
+            // filter for sites
+            // filter for keywords
+            // filter for authors.
+        
+            var $panel = $('<div class="panel panel-success' +
+                           '            panel-custom"></div>');
+        
+            // append everything together.
+            $panel.append(heading).append(body);
+            $filter.append($panel);
+        
+            return $filter;
         }
     });
 
