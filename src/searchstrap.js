@@ -38,9 +38,6 @@
          */
         sort: 'lastModifiedDate desc',
 
-        // jQuery selector for the the search result section.
-        resultSelector: '#search-result',
-
         // search input builder.
         inputBuilder: null, // it will include the summary
         summaryBuilder: null,
@@ -48,15 +45,21 @@
         // build the pagenation nav bar.
         paginationBuilder: null,
 
+        // jQuery selector for the the search result list section.
+        resultSelector: '#search-result',
         // set the template for search result.
         // available templates: 2Columns, AcronymsList
         // empty will means using the default.
         resultTemplate: null,
         // set the function to build the HTML for each item.
         // we could NOT use prototype function here. 
-        // we could set to use default prototype function by live this 
-        // options to empty (null), then we could use the default builder 
-        // function.
+        // we could set to use default prototype function by set this 
+        // options to empty (null), 
+        // then we could use the default builder function.
+        // result filter panel, it could be empty.
+        filterSelector: '#search-filter',
+        // the template to build filter panel.
+        filterTemplate: null,
         //panelFunction: function(item) {
         //    // define the default function for each item.
         //    var panel = '<h2><a href="' + item['url'] + '">' +
@@ -351,21 +354,10 @@
                                         currentPage, totalPages);
             self.$searchSummary.html(searchSummary);
 
-            // here the result list DOM object.
-            var $result = $(self.settings.resultSelector);
-
-            // build the result page based on the result template.
-            if (self.settings.resultTemplate) {
-                $result = self.settings.resultTemplate($result,
-                        data.docs, currentQuery, total, 
-                        currentPage, totalPages, pagination);
-            } else {
-                // using the default template, in file
-                // templates/2cols.js
-                $result = build2ColumnResult($result, 
-                        data.docs, currentQuery, total,
-                        currentPage, totalPages, pagination);
-            }
+            // build the result list panel.
+            var $result = 
+                self.buildResultListPanel(data.docs, currentQuery,
+                    total, currentPage, totalPages, pagination);
 
             // hook click event for all available pages on 
             // pagination nav bar.
@@ -380,6 +372,9 @@
                                       currentPage, totalPages, 
                                       perPage);
             });
+
+            // build the result filter panel.
+            self.buildResultFilterPanel();
         },
 
         /**
@@ -388,6 +383,25 @@
         buildSearchBox: function() {
 
             this.defaultSearchBox(this);
+        },
+
+        /**
+         * toggle removal icon, we assume glyphicon-remove is used 
+         * as the removal icon.
+         * TODO: make this configurable.
+         */
+        toggleRemoveIcon: function() {
+
+            var self = this;
+
+            if(self.$searchInput.val()) {
+                // show the glyphicon remove.
+                self.$element.find('.glyphicon-remove').
+                     removeClass('hidden');
+            } else {
+                self.$element.find('.glyphicon-remove').
+                     addClass('hidden');
+            }
         },
 
         /**
@@ -456,22 +470,36 @@
         },
 
         /**
-         * toggle removal icon, we assume glyphicon-remove is used 
-         * as the removal icon.
-         * TODO: make this configurable.
+         * build the result list panel
          */
-        toggleRemoveIcon: function() {
+        buildResultListPanel: function(docs, currentQuery, total,
+                               currentPage, totalPages, pagination) {
 
             var self = this;
 
-            if(self.$searchInput.val()) {
-                // show the glyphicon remove.
-                self.$element.find('.glyphicon-remove').
-                     removeClass('hidden');
+            // here the result list DOM object.
+            var $result = $(self.settings.resultSelector);
+
+            // build the result page based on the result template.
+            if (self.settings.resultTemplate) {
+                $result = self.settings.resultTemplate($result,
+                        docs, currentQuery, total, 
+                        currentPage, totalPages, pagination);
             } else {
-                self.$element.find('.glyphicon-remove').
-                     addClass('hidden');
+                // using the default template, in file
+                // templates/2cols.js
+                $result = build2ColumnResult($result, 
+                        docs, currentQuery, total,
+                        currentPage, totalPages, pagination);
             }
+
+            return $result;
+        },
+
+        /**
+         * build the result filter panel.
+         */
+        buildResultFilterPanel: function() {
         },
 
         /**
@@ -629,7 +657,7 @@
             strap.$element.find('.glyphicon-remove')
                 .on('click', function(event) {
 
-                strap.$inputBox.val('');
+                strap.$searchInput.val('');
                 // hide the remove icon.
                 $(this).addClass('hidden');
                 // trigger search and reload page.
