@@ -17,8 +17,6 @@
         placeholder: 'Find ...',
         // the kkkkkk
         itemsPerPage: 10,
-        // id for the search button.
-        searchButton : 'search-button',
         // query param for search term.
         queryName : 'searchterm',
 
@@ -40,8 +38,17 @@
          */
         sort: 'lastModifiedDate desc',
 
+        // id for the search button.
+        searchButton: 'search-button',
         // jQuery selector for the the search result section.
         resultSelector: '#search-result',
+
+        // search input builder.
+        inputBuilder: null, // it will include the summary
+        summaryBuilder: null,
+
+        // build the pagenation nav bar.
+        paginationBuilder: null,
 
         // set the template for search result.
         // available templates: 2Columns, AcronymsList
@@ -109,7 +116,11 @@
 
             // build the search box.
             // TODO: make this configurable!
-            var searchBox = self.buildSearchBox();
+            // reference Gooble search, search box will inlcue
+            // - search input box. $inputBox
+            // - search result summary $searchSummary
+            // - top category tabs. TODO
+            self.buildSearchBox(self);
 
             // we will get search term from query
             // TODO: more are comming: facets, sort, etc.
@@ -361,18 +372,16 @@
 
         /**
          * the default builder to build search input box
-         * this will depend on Bootstap
+         * this will depend on Bootstrap
          */
-        buildSearchBox: function() {
-
-            var self = this;
+        buildSearchBox: function(strap) {
 
             var searchBox = 
 '<div class="input-group input-group-lg"' +
 '     role="group" aria-label="...">' +
 '  <div class="form-group form-group-lg has-feedback has-clear">' +
 '    <input type="text" class="form-control"' +
-'           placeholder="' + self.settings.placeholder + '"' +
+'           placeholder="' + strap.settings.placeholder + '"' +
 '           id="search-input"' +
 '           aria-describedby="sizing-addon"/>' +
 '    <span class="form-control-clear text-danger' +
@@ -390,18 +399,18 @@
 '  <h2>Loading...</h2>' +
 '</div>';
 
-            self.$element.html('').append(searchBox);
-            self.$inputBox = self.$element.find('input');
+            strap.$element.html('').append(searchBox);
+            strap.$inputBox = strap.$element.find('input');
 
             // hook the clik event on the remove icon.
-            self.$element.find('.glyphicon-remove')
+            strap.$element.find('.glyphicon-remove')
                 .on('click', function(event) {
 
-                self.$inputBox.val('');
+                strap.$inputBox.val('');
                 // hide the remove icon.
                 $(this).addClass('hidden');
-                // reload page.
-                self.handleButtonClick();
+                // trigger search and reload page.
+                strap.handleButtonClick();
             });
         },
 
@@ -422,96 +431,6 @@
                 self.$element.find('.glyphicon-remove').
                      addClass('hidden');
             }
-        },
-
-        /**
-         * build the Acronyms list, which will have 6 columns
-         */
-        buildAcronymsList: function(docs, currentQuery, total, 
-                                    currentPage, totalPages) {
-
-            var resultSummary = '';
-            if(total > 0) {
-                var end = currentQuery.start +
-                          currentQuery.perPage - 1;
-                end = end > total ? total : end;
-                resultSummary =
-                    'Page <strong>' + currentPage + '</strong>' +
-                    ' Showing [<strong>' + currentQuery.start +
-                    '</strong> - <strong>' + end +
-                    '</strong>] of <strong>' +
-                    total + '</strong> total results';
-            } else {
-                // no result found
-                resultSummary =
-                    '<strong>No results containing ' +
-                    'all your search terms were found.</strong>';
-            }
-            $('#search-info').html(resultSummary);
-
-            // build a 6 columns to show 
-            var result = $(this.settings.resultSelector);
-            result.html("");
-
-            // build the pagination bar.
-            var pagination = totalPages <= 1 ? '' :
-                this.buildPaginationDots(currentPage, totalPages);
-            //result.append('<div>' + pagination + '</div>');
-            var colQueue =[];
-            for(i = 0; i < docs.length; i++) {
-                var acronym = docs[i];
-                //var panel = this.buildAcronymPanel(acronym);
-                var panel = this.settings.panelFunction(acronym);
-                colQueue.push(panel);
-                // i count from 0
-                // 6 acronyms for a row
-                var ready2Row = (i + 1) % 4;
-                if(ready2Row == 0) {
-                    result.append('<div class="row">' +
-                        colQueue.join("") + '</div>');
-                    // reset the queue.
-                    colQueue = [];
-                }
-            }
-
-            // check if we missed anything...
-            if(colQueue.length > 0) {
-
-                // append to the last row.
-                result.append('<div class="row">' +
-                    colQueue.join(" ") +
-                    '</div>');
-            }
-
-            // add the pagination at the bottom too.
-            result.append('<div>' + pagination + '</div>');
-
-            return result;
-        },
-
-        /**
-         * build acronym panel.
-         */
-        buildAcronymPanel: function(acronym) {
-
-           // try to remove some wiki markups.
-           var desc = acronym['description'];
-           // replace wiki syntax.
-           var text = desc
-              .replace(/.*may refer to:/g, '')
-              .replace(/\[http.*/g, '')
-              .replace(/\[\[Category:.*/g, '')
-              .replace(/[\]\[\']/g, '')
-              .replace(/\*/, '<ul><li>')
-              .replace(/\*/g, '</li><li>');
-
-           var panel = '<div class="col-sm-3">' + 
-               '<h2 class="text-center">' +
-               '<a href="' + acronym['url'] + '">' +
-               acronym['title'] + '</a></h2>' +
-               '<p>' + text + '</li></ul></p>' + 
-               '</div>';
-           return panel;
         },
 
         /**
@@ -833,6 +752,14 @@
             this.search(query);
             this.updateBrowserUrl(query);
         }
+
+        /*******************************************
+         * some of the default builders and templates.
+         */
+
+       /**
+        * default search box builder.
+        */
     });
 
 })(jQuery);
