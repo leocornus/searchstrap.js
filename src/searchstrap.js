@@ -374,7 +374,8 @@
             });
 
             // build the result filter panel.
-            self.buildResultFilterPanel();
+            // TODO: get ready facets and current query.
+            self.buildResultFilterPanel(data.facets, currentQuery);
         },
 
         /**
@@ -502,6 +503,7 @@
         buildResultFilterPanel: function(facets, currentQuery) {
 
             var self = this;
+            //console.log(facets);
 
             // here the result list DOM object.
             var $filter = $(self.settings.filterSelector);
