@@ -482,7 +482,7 @@
 
             // build the result page based on the result template.
             if (self.settings.resultTemplate) {
-                $result = self.settings.resultTemplate($result,
+                $result = self.settings.resultTemplate(self, $result,
                         docs, currentQuery, total, 
                         currentPage, totalPages, pagination);
             } else {

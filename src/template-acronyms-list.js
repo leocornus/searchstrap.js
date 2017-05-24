@@ -1,8 +1,8 @@
 /**
  * build the Acronyms list, which will have 6 columns
  */
-var buildAcronymsList = function($result, docs, currentQuery, total, 
-                            currentPage, totalPages, pagination) {
+var buildAcronymsList = function(strap, $result, docs, currentQuery,
+                     total, currentPage, totalPages, pagination) {
 
     var resultSummary = '';
     if(total > 0) {

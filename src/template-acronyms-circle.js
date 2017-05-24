@@ -1,7 +1,8 @@
 /**
  * build the Acronyms in zoomable circles. 
  */
-var buildAcronymsCircles = function($result, docs, currentQuery,
+var buildAcronymsCircles = function(strap, $result, docs,
+                        currentQuery,
                         total, currentPage, totalPages, pagination) {
 
     var resultSummary = '';

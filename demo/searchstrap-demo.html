@@ -91,7 +91,7 @@ $('.form-control-clear').click(function() {
         searchUrl: localSettings.searchUrl,
         //placeholder: "Find Acronyms",
         // magic numbers: 3, 7, 19, 37
-        itemsPerPage: 6,
+        itemsPerPage: 16,
         sort: 'lastModifiedDate desc',
         // we don't need search button here.
         //fq: 'site: revenue AND keywords: "Staffing Announcements"',
@@ -103,7 +103,7 @@ $('.form-control-clear').click(function() {
         },
         resultSelector: '#result-list',
         //resultTemplate: buildAcronymsCircles,
-        //resultTemplate: buildAcronymsList,
+        resultTemplate: buildAcronymsList,
         autoReload: false
     });
 });
