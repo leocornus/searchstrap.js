@@ -38,8 +38,6 @@
          */
         sort: 'lastModifiedDate desc',
 
-        // id for the search button.
-        searchButton: 'search-button',
         // jQuery selector for the the search result section.
         resultSelector: '#search-result',
 
@@ -117,10 +115,11 @@
             // build the search box.
             // TODO: make this configurable!
             // reference Gooble search, search box will inlcue
-            // - search input box. $inputBox
+            // - search input box. $searchInput
+            // - search button. $searchButton
             // - search result summary $searchSummary
             // - top category tabs. TODO
-            self.buildSearchBox(self);
+            self.buildSearchBox();
 
             // we will get search term from query
             // TODO: more are comming: facets, sort, etc.
@@ -133,14 +132,14 @@
                              queryParams[paramName] : '';
             searchTerm = decodeURIComponent(searchTerm);
             // set the initial value for input box
-            self.$inputBox.val(searchTerm);
+            self.$searchInput.val(searchTerm);
             // show the glyphicon remove.
             self.toggleRemoveIcon();
             // trigger the propertychange event. 
             // some function depends on this event.
             // e.g., the clear button using Bootstrap feedback icon
             // will depen on this event.
-            self.$inputBox.trigger('propertychange');
+            self.$searchInput.trigger('propertychange');
 
             // set the start to 1 if we could not find it.
             var start = 'start' in queryParams ?
@@ -155,14 +154,12 @@
 
             // hook the click event to search button.
             //console.log(self.settings.searchButton);
-            $('#' + self.settings.searchButton).
-                on('click', function() {
-
+            self.$searchButton.on('click', function() {
                 self.handleButtonClick();
             });
 
             // hook the key press event.
-            self.$inputBox.on('keypress', function(event) {
+            self.$searchInput.on('keypress', function(event) {
 
                 //console.log(event);
                 // only handle the enter key.
@@ -172,7 +169,7 @@
             });
 
             // hook the key up event for the input field.
-            self.$inputBox.on('keyup', function(event) {
+            self.$searchInput.on('keyup', function(event) {
 
                 self.toggleRemoveIcon();
 
@@ -270,7 +267,7 @@
          */
         handleButtonClick : function() {
 
-            var term = this.$inputBox.val();
+            var term = this.$searchInput.val();
             // prepare the query to perform the initial search
             // this is a new search, reset start to 1
             var query = this.prepareSearchQuery(term, 1);
@@ -371,47 +368,11 @@
         },
 
         /**
-         * the default builder to build search input box
-         * this will depend on Bootstrap
+         * build the search box.
          */
-        buildSearchBox: function(strap) {
+        buildSearchBox: function() {
 
-            var searchBox = 
-'<div class="input-group input-group-lg"' +
-'     role="group" aria-label="...">' +
-'  <div class="form-group form-group-lg has-feedback has-clear">' +
-'    <input type="text" class="form-control"' +
-'           placeholder="' + strap.settings.placeholder + '"' +
-'           id="search-input"' +
-'           aria-describedby="sizing-addon"/>' +
-'    <span class="form-control-clear text-danger' +
-'                 glyphicon glyphicon-remove' +
-'                 form-control-feedback hidden"></span>' +
-'  </div>' +
-'  <span class="input-group-addon" id="search-button"' +
-'        style="cursor: pointer">' +
-'    <span class="glyphicon glyphicon-search ' +
-'                 text-primary"></span> Search' +
-'  </span>' +
-'</div>' +
-// the infor bar.
-'<div class="text-muted h4" id="search-info">' +
-'  <h2>Loading...</h2>' +
-'</div>';
-
-            strap.$element.html('').append(searchBox);
-            strap.$inputBox = strap.$element.find('input');
-
-            // hook the clik event on the remove icon.
-            strap.$element.find('.glyphicon-remove')
-                .on('click', function(event) {
-
-                strap.$inputBox.val('');
-                // hide the remove icon.
-                $(this).addClass('hidden');
-                // trigger search and reload page.
-                strap.handleButtonClick();
-            });
+            this.defaultSearchBox(this);
         },
 
         /**
@@ -423,7 +384,7 @@
 
             var self = this;
 
-            if(self.$inputBox.val()) {
+            if(self.$searchInput.val()) {
                 // show the glyphicon remove.
                 self.$element.find('.glyphicon-remove').
                      removeClass('hidden');
@@ -751,15 +712,67 @@
                 this.prepareSearchQuery(term, start);
             this.search(query);
             this.updateBrowserUrl(query);
-        }
+        },
 
         /*******************************************
          * some of the default builders and templates.
          */
 
-       /**
-        * default search box builder.
-        */
+        /**
+         * the default builder to build search input box
+         * this will depend on Bootstrap
+         */
+        defaultSearchBox: function(strap) {
+
+            // build the search box.
+            var searchBox = 
+'<div class="input-group input-group-lg"' +
+'     role="group" aria-label="...">' +
+'  <div class="form-group form-group-lg has-feedback has-clear">' +
+'    <input type="text" class="form-control"' +
+'           placeholder="' + strap.settings.placeholder + '"' +
+'           id="search-input"' +
+'           aria-describedby="sizing-addon"/>' +
+'    <span class="form-control-clear text-danger' +
+'                 glyphicon glyphicon-remove' +
+'                 form-control-feedback hidden"></span>' +
+'  </div>' +
+'  <span class="input-group-addon" id="search-button"' +
+'        style="cursor: pointer">' +
+'    <span class="glyphicon glyphicon-search ' +
+'                 text-primary"></span> Search' +
+'  </span>' +
+'</div>' +
+// the info bar. summary of search result.
+'<div class="text-muted h5" id="search-info">' +
+'  <h2>Loading...</h2>' +
+'</div>';
+
+            strap.$element.html('').append(searchBox);
+            // set up the searchInput jQuery object..
+            strap.$searchInput = strap.$element.find('input');
+            // set up the searchButton jQuery object
+            strap.$searchButton = 
+                strap.$element.find('#search-button');
+            // set up the search summary.
+            strap.$searchSummary = 
+                strap.$element.find('#search-info');
+
+            // hook the clik event on the remove icon.
+            strap.$element.find('.glyphicon-remove')
+                .on('click', function(event) {
+
+                strap.$inputBox.val('');
+                // hide the remove icon.
+                $(this).addClass('hidden');
+                // trigger search and reload page.
+                strap.handleButtonClick();
+            });
+        }
+
+        /**
+         * default search box builder.
+         */
     });
 
 })(jQuery);
