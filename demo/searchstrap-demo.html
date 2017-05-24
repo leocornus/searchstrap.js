@@ -11,6 +11,7 @@
 
     <script src='local.js'></script>
     <script src='/src/searchstrap.js'></script>
+    <script src='/src/templates/2cols.js'></script>
     <script src='/src/template-acronyms-circle.js'></script>
     <script src='/src/template-acronyms-list.js'></script>
 
@@ -101,7 +102,7 @@ $('.form-control-clear').click(function() {
             facetField: ['authors']
         },
         resultSelector: '#result-list',
-        resultTemplate: buildAcronymsCircles,
+        //resultTemplate: buildAcronymsCircles,
         //resultTemplate: buildAcronymsList,
         autoReload: false
     });

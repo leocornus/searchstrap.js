@@ -108,10 +108,11 @@
             var self = this;
 
             // build the search box.
+            // TODO: make this configurable!
             var searchBox = self.buildSearchBox();
 
             // we will get search term from query
-            // TODO: more are comming, facets, sort, etc.
+            // TODO: more are comming: facets, sort, etc.
             var paramName = self.settings.queryName;
             var queryParams = self.getUrlVars();
 
@@ -128,11 +129,12 @@
             // some function depends on this event.
             // e.g., the clear button using Bootstrap feedback icon
             // will depen on this event.
-            this.$inputBox.trigger('propertychange');
+            self.$inputBox.trigger('propertychange');
 
             // set the start to 1 if we could not find it.
             var start = 'start' in queryParams ?
                         queryParams['start'] : 1;
+            // TODO: handle facets, sorting, etc.
 
             // prepare the query to perform the initial search
             var searchQuery =
@@ -307,6 +309,7 @@
         handleSearchResult: function(data) {
 
             var self = this;
+
             // log the data for debuging...
             console.log(data);
 
@@ -321,11 +324,12 @@
             var totalPages = Math.ceil(total / currentQuery.perPage);
 
             // build the pagination bar.
+            // TODO: make the pagination builder.
             var pagination = totalPages <= 1 ? '' :
                 self.buildPaginationDots(currentPage, totalPages);
 
             // here the result list DOM object.
-            var $result = $(this.settings.resultSelector);
+            var $result = $(self.settings.resultSelector);
 
             // build the result page based on the result template.
             if (self.settings.resultTemplate) {
@@ -333,16 +337,16 @@
                         data.docs, currentQuery, total, 
                         currentPage, totalPages, pagination);
             } else {
-                // using the default template.
-                $result =
-                    self.build2ColumnResult(data.docs, 
-                        currentQuery, 
-                        total, currentPage, totalPages, pagination);
+                // using the default template, in file
+                // templates/2cols.js
+                $result = build2ColumnResult($result, 
+                        data.docs, currentQuery, total,
+                        currentPage, totalPages, pagination);
             }
 
-            // TODO: hook events:
             // hook click event for all available pages on 
             // pagination nav bar.
+            // TODO: set up the parameter: activePagesSelector:
             $result.find('nav ul li[class!="active"] a').
                 on('click', function(event) {
 
@@ -402,7 +406,9 @@
         },
 
         /**
-         * toggle remove icon.
+         * toggle removal icon, we assume glyphicon-remove is used 
+         * as the removal icon.
+         * TODO: make this configurable.
          */
         toggleRemoveIcon: function() {
 
@@ -416,49 +422,6 @@
                 self.$element.find('.glyphicon-remove').
                      addClass('hidden');
             }
-        },
-
-        /**
-         * build the 2 column search result list, which will have
-         *   - col-8 column for current search result, using panel.
-         *   - col-4 column for search filters, unsing panel.
-         *
-         * The current search panel will include:
-         *   - current search with field query list, panel-heading
-         *   - sorting dropdown, panel-body
-         *   - summary of search result: total pages, current pages, 
-         *     total items
-         *   - list of items in list-group > list-group-item > media
-         *   - pagination, panel-footer
-         *
-         * The search filter panel will include:
-         *   - search filters
-         *   - facets label and facets values in tag cloud.
-         */
-        build2ColumnResult: function(docs, currentQuery, total, 
-                          currentPage, totalPages, pagination) {
-
-            // build the current search panel, which will include
-            //  - infomaiont bar
-            //  - list of items.
-            //  - pagination
-            var $currentSearch = 
-                this.buildCurrentSearchPanel(docs, currentQuery, 
-                        total, currentPage, totalPages, pagination);
-            // build the search filter panel.
-            var $searchFilter = this.buildSearchFilterPanel();
-
-            // the left column.
-            var $leftCol = $('<div class="col-md-8"></div>');
-            $leftCol.append($currentSearch);
-            // the right column
-            var $rightCol = $('<div class="col-md-4"></div>');
-            $rightCol.append($searchFilter);
-
-            var $result = $(this.settings.resultSelector);
-            $result.html('').append($leftCol).append($rightCol);
-
-            return $result;
         },
 
         /**
@@ -549,94 +512,6 @@
                '<p>' + text + '</li></ul></p>' + 
                '</div>';
            return panel;
-        },
-
-        /**
-         * build the current search panel.
-         */
-        buildCurrentSearchPanel: function(docs, currentQuery,
-            total, currentPage, totalPages, pagination) {
-
-            var self = this;
-
-            // panel heading...
-            var heading = 
-                '<div class="panel-heading">' +
-                '  <strong>Current Search:</strong><br/>' +
-                currentQuery.term + '<br/>' +
-                '<span>' +
-                '  <strong>Order by:</strong>' +
-                '  <select class="success" id="order">' +
-                '    <option value="relevance">Relevance</option>' +
-                '    <option value="changetime">Last Modified Date</option>' +
-                '  </select>' +
-                '</span>' +
-                '</div>';
-
-            // panel body
-            var end = currentQuery.start + currentQuery.perPage - 1;
-            end = end > total ? total : end;
-            var body = 
-                '<div class="panel-body bg-info-custom">' +
-                'Page <strong>' + currentPage + '</strong>' +
-                ' Showing [<strong>' + currentQuery.start + 
-                '</strong> - <strong>' + end + 
-                '</strong>] of <strong>' +
-                total + '</strong> total results' +
-                '</div>';
-
-            // using list group for search result.
-            var $ul = $('<ul class="list-group"></ul>');
-            $.each(docs, function(index, item) {
-                // present each item as a list group item.
-                var liHtml = self.buildMediaItemHtml(item);
-                $ul.append(liHtml);
-            });
-
-            // panel footer, pagination nav bar.
-            var footer = 
-                '<div class="panel-footer panel-footer-custom">' +
-                pagination +
-                '</div>';
-
-            var $panel = $('<div class="panel panel-info' +
-                           '            panel-custom"></div>');
-
-            // append everything together.
-            $panel.append(heading).append(body)
-                  .append($ul).append(footer);
-
-            return $panel;
-        },
-
-        /**
-         * build the search filter panel.
-         */
-        buildSearchFilterPanel: function() {
-
-            // panel heading...
-            var heading = 
-                '<div class="panel-heading">' +
-                '  <strong>Search Filters</strong>' +
-                '</div>';
-
-            var body = 
-                '<div class="panel-body">' +
-                '  LIST OF FILTERS.' +
-                '  <p></p>' +
-                '  In Tag Cloud' +
-                '</div>';
-            // filter for sites
-            // filter for keywords
-            // filter for authors.
-
-            var $panel = $('<div class="panel panel-success' +
-                           '            panel-custom"></div>');
-
-            // append everything together.
-            $panel.append(heading).append(body);
-
-            return $panel;
         },
 
         /**
