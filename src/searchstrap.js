@@ -488,7 +488,7 @@
             } else {
                 // using the default template, in file
                 // templates/2cols.js
-                $result = build2ColumnResult($result, 
+                $result = self.defaultResultList(self, $result,
                         docs, currentQuery, total,
                         currentPage, totalPages, pagination);
             }
@@ -867,6 +867,73 @@
             }
 
             return resultSummary;
+        },
+
+        /**
+         * default result list panel.
+         */
+        defaultResultList: function(strap, $result, docs,
+                                    currentQuery, total, currentPage,
+                                    totalPages, pagination) {
+
+            // build the current search panel, which will include
+            //  - list of items.
+            //  - pagination
+            var $currentSearch = 
+                strap.buildCurrentSearchPanel(strap, docs, 
+                        currentQuery, 
+                        total, currentPage, totalPages, pagination);
+
+            $result.html('').append($currentSearch);
+
+            return $result;
+        },
+
+        /**
+         * build the current search panel.
+         */
+        buildCurrentSearchPanel: function(strap, docs, currentQuery,
+            total, currentPage, totalPages, pagination) {
+
+            // panel heading...
+            var heading = 
+                '<div class="panel-heading">' +
+                '<span>' +
+                '  <strong>Order by:</strong>' +
+                '  <select class="success" id="order">' +
+                '    <option value="relevance">Relevance</option>' +
+                '    <option value="changetime">Last Modified Date</option>' +
+                '  </select>' +
+                '</span>' +
+                '</div>';
+
+            // panel body
+            var end = currentQuery.start + currentQuery.perPage - 1;
+            end = end > total ? total : end;
+            var body = '';
+
+            // using list group for search result.
+            var $ul = $('<ul class="list-group"></ul>');
+            $.each(docs, function(index, item) {
+                // present each item as a list group item.
+                var liHtml = strap.buildMediaItemHtml(item);
+                $ul.append(liHtml);
+            });
+
+            // panel footer, pagination nav bar.
+            var footer = 
+                '<div class="panel-footer panel-footer-custom">' +
+                pagination +
+                '</div>';
+
+            var $panel = $('<div class="panel panel-info' +
+                           '            panel-custom"></div>');
+
+            // append everything together.
+            $panel.append(heading).append(body)
+                  .append($ul).append(footer);
+
+            return $panel;
         }
     });
 
