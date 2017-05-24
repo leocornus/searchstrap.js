@@ -119,6 +119,7 @@
             // - search button. $searchButton
             // - search result summary $searchSummary
             // - top category tabs. TODO
+            // - you could add your own here!
             self.buildSearchBox();
 
             // we will get search term from query
@@ -321,8 +322,13 @@
             // log the data for debuging...
             console.log(data);
 
+            // save the current query, we need it for next page.
             var currentQuery = data.currentQuery;
+
             // TODO: analyze the search result.
+            // =========================================
+            // analyze the result and collect data!
+
             // total results.
             var total = data.total;
             // calculate current page.
@@ -331,10 +337,19 @@
             // calculate the total pages.
             var totalPages = Math.ceil(total / currentQuery.perPage);
 
+            // ============================================
+            // build components for data
+
             // build the pagination bar.
             // TODO: make the pagination builder.
             var pagination = totalPages <= 1 ? '' :
-                self.buildPaginationDots(currentPage, totalPages);
+                self.buildPagination(currentPage, totalPages);
+
+            // build the summary of search result.
+            var searchSummary = 
+                self.buildSearchSummary(currentQuery, total,
+                                        currentPage, totalPages);
+            self.$searchSummary.html(searchSummary);
 
             // here the result list DOM object.
             var $result = $(self.settings.resultSelector);
@@ -373,6 +388,71 @@
         buildSearchBox: function() {
 
             this.defaultSearchBox(this);
+        },
+
+        /**
+         * build the search summary.
+         */
+        buildSearchSummary: function(currentQuery, total, 
+                                     currentPage, totalPages) {
+
+            // TODO: add the configurable logic.
+            var summary = 
+                this.defaultSearchSummary(currentQuery, total,
+                                          currentPage, totalPages);
+
+            return summary;
+        },
+
+        /**
+         * using the current query and total to build the 
+         * pagination bar.
+         */
+        buildPagination: function(currentPage, totalPages) {
+
+            var self = this;
+
+            // TODO: add configurable logic!
+            var pagination = 
+                self.defaultPaginationDots(self, 
+                                           currentPage, totalPages);
+
+            return pagination;
+        },
+
+        /**
+         * handle the pagination.
+         */
+        handlePagination: function($href, term, currentPage,
+                                   totalPages, perPage) {
+
+            var pageText = $href.text();
+            var nextPage = 1;
+            //console.log('page = ' + pageText);
+            if(pageText.includes('First')) {
+                // the first page button. do nothing using 
+                // the default, start from 1
+                nextPage = 1;
+            } else if(pageText.includes('Last')) {
+                // last page.
+                nextPage = totalPages;
+            } else if(pageText.includes('Previous')) {
+                // previous page.
+                nextPage = currentPage - 1;
+            } else if(pageText.includes('Next')) {
+                // the next page.
+                nextPage = currentPage + 1;
+            } else {
+                // get what user selected.
+                nextPage = parseInt(pageText);
+            }
+            var start = (nextPage - 1) * parseInt(perPage) + 1;
+
+            // calculate start number to build search query.
+            var query = 
+                this.prepareSearchQuery(term, start);
+            this.search(query);
+            this.updateBrowserUrl(query);
         },
 
         /**
@@ -419,7 +499,7 @@
 
             // build the pagination bar.
             var pagination = 
-                this.buildPaginationDots(currentPage, totalPages);
+                this.buildPagination(currentPage, totalPages);
 
             // the search result section: 
             var $result = $(self.settings.resultSelector);
@@ -501,11 +581,66 @@
             return itemHtml;
         },
 
-        /**
-         * using the current query and total to build the 
-         * pagination bar.
+        /*******************************************
+         * some of the default builders and templates.
          */
-        buildPagination: function(currentPage, totalPages) {
+
+        /**
+         * the default builder to build search input box
+         * this will depend on Bootstrap
+         */
+        defaultSearchBox: function(strap) {
+
+            // build the search box.
+            var searchBox = 
+'<div class="input-group input-group-lg"' +
+'     role="group" aria-label="...">' +
+'  <div class="form-group form-group-lg has-feedback has-clear">' +
+'    <input type="text" class="form-control"' +
+'           placeholder="' + strap.settings.placeholder + '"' +
+'           id="search-input"' +
+'           aria-describedby="sizing-addon"/>' +
+'    <span class="form-control-clear text-danger' +
+'                 glyphicon glyphicon-remove' +
+'                 form-control-feedback hidden"></span>' +
+'  </div>' +
+'  <span class="input-group-addon" id="search-button"' +
+'        style="cursor: pointer">' +
+'    <span class="glyphicon glyphicon-search ' +
+'                 text-primary"></span> Search' +
+'  </span>' +
+'</div>' +
+// the info bar. summary of search result.
+'<div class="text-muted h5" id="search-info">' +
+'  <h2>Loading...</h2>' +
+'</div>';
+
+            strap.$element.html('').append(searchBox);
+            // set up the searchInput jQuery object..
+            strap.$searchInput = strap.$element.find('input');
+            // set up the searchButton jQuery object
+            strap.$searchButton = 
+                strap.$element.find('#search-button');
+            // set up the search summary.
+            strap.$searchSummary = 
+                strap.$element.find('#search-info');
+
+            // hook the clik event on the remove icon.
+            strap.$element.find('.glyphicon-remove')
+                .on('click', function(event) {
+
+                strap.$inputBox.val('');
+                // hide the remove icon.
+                $(this).addClass('hidden');
+                // trigger search and reload page.
+                strap.handleButtonClick();
+            });
+        },
+
+        /**
+         * build the default pagination 
+         */
+        defaultPagination: function(currentPage, totalPages) {
 
             // border check up (first, last)
             // previous button will be handled by first page.
@@ -544,10 +679,10 @@
         },
         
         /**
-         * build the pagination with ... and 
+         * build the default pagination with ... and 
          * without First and Last button.
          */
-        buildPaginationDots: function(currentPage, totalPages,
+        defaultPaginationDots: function(strap, currentPage, totalPages,
                 surroundingPages, tailingPages) {
 
             // set default value for surrouning and tailing pages.
@@ -680,99 +815,31 @@
         },
 
         /**
-         * handle the pagination.
+         * the default search summary.
          */
-        handlePagination: function($href, term, currentPage,
-                                   totalPages, perPage) {
-
-            var pageText = $href.text();
-            var nextPage = 1;
-            //console.log('page = ' + pageText);
-            if(pageText.includes('First')) {
-                // the first page button. do nothing using 
-                // the default, start from 1
-                nextPage = 1;
-            } else if(pageText.includes('Last')) {
-                // last page.
-                nextPage = totalPages;
-            } else if(pageText.includes('Previous')) {
-                // previous page.
-                nextPage = currentPage - 1;
-            } else if(pageText.includes('Next')) {
-                // the next page.
-                nextPage = currentPage + 1;
+        defaultSearchSummary: function(currentQuery, total,
+                                       currentPage, totalPages) {
+            //
+            var resultSummary = '';
+            if(total > 0) {
+                var end = currentQuery.start +
+                          currentQuery.perPage - 1;
+                end = end > total ? total : end;
+                resultSummary =
+                    'Page <strong>' + currentPage + '</strong>' +
+                    ' Showing [<strong>' + currentQuery.start +
+                    '</strong> - <strong>' + end +
+                    '</strong>] of <strong>' +
+                    total + '</strong> total results';
             } else {
-                // get what user selected.
-                nextPage = parseInt(pageText);
+                // no result found
+                resultSummary =
+                    '<strong>No results containing ' +
+                    'all your search terms were found.</strong>';
             }
-            var start = (nextPage - 1) * parseInt(perPage) + 1;
 
-            // calculate start number to build search query.
-            var query = 
-                this.prepareSearchQuery(term, start);
-            this.search(query);
-            this.updateBrowserUrl(query);
-        },
-
-        /*******************************************
-         * some of the default builders and templates.
-         */
-
-        /**
-         * the default builder to build search input box
-         * this will depend on Bootstrap
-         */
-        defaultSearchBox: function(strap) {
-
-            // build the search box.
-            var searchBox = 
-'<div class="input-group input-group-lg"' +
-'     role="group" aria-label="...">' +
-'  <div class="form-group form-group-lg has-feedback has-clear">' +
-'    <input type="text" class="form-control"' +
-'           placeholder="' + strap.settings.placeholder + '"' +
-'           id="search-input"' +
-'           aria-describedby="sizing-addon"/>' +
-'    <span class="form-control-clear text-danger' +
-'                 glyphicon glyphicon-remove' +
-'                 form-control-feedback hidden"></span>' +
-'  </div>' +
-'  <span class="input-group-addon" id="search-button"' +
-'        style="cursor: pointer">' +
-'    <span class="glyphicon glyphicon-search ' +
-'                 text-primary"></span> Search' +
-'  </span>' +
-'</div>' +
-// the info bar. summary of search result.
-'<div class="text-muted h5" id="search-info">' +
-'  <h2>Loading...</h2>' +
-'</div>';
-
-            strap.$element.html('').append(searchBox);
-            // set up the searchInput jQuery object..
-            strap.$searchInput = strap.$element.find('input');
-            // set up the searchButton jQuery object
-            strap.$searchButton = 
-                strap.$element.find('#search-button');
-            // set up the search summary.
-            strap.$searchSummary = 
-                strap.$element.find('#search-info');
-
-            // hook the clik event on the remove icon.
-            strap.$element.find('.glyphicon-remove')
-                .on('click', function(event) {
-
-                strap.$inputBox.val('');
-                // hide the remove icon.
-                $(this).addClass('hidden');
-                // trigger search and reload page.
-                strap.handleButtonClick();
-            });
+            return resultSummary;
         }
-
-        /**
-         * default search box builder.
-         */
     });
 
 })(jQuery);
