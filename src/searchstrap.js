@@ -666,7 +666,7 @@
 '  </span>' +
 '</div>' +
 // the info bar. summary of search result.
-'<div class="text-muted h5" id="search-info">' +
+'<div class="text-muted h4" id="search-info">' +
 '  <h2>Loading...</h2>' +
 '</div>';
 
@@ -701,7 +701,8 @@
             // previous button will be handled by first page.
             // next button will be hanelded by last page.
             var pagination = '<nav class="text-center">' +
-                             '<ul class="pagination">';
+                             '<ul class="pagination"' +
+                             '    style="cursor: pointer">';
 
             // decide the previous page.
             if(currentPage !== 1) {
@@ -737,8 +738,8 @@
          * build the default pagination with ... and 
          * without First and Last button.
          */
-        defaultPaginationDots: function(strap, currentPage, totalPages,
-                surroundingPages, tailingPages) {
+        defaultPaginationDots: function(strap, currentPage,
+                totalPages, surroundingPages, tailingPages) {
 
             // set default value for surrouning and tailing pages.
             var surroundingPages = 
@@ -749,7 +750,8 @@
                 tailingPages : 2;
 
             var pagination = '<nav class="text-center">' +
-                             '<ul class="pagination">';
+                             '<ul class="pagination"' +
+                             '    style="cursor: pointer">';
 
             var thePage = '';
             // decide the previous page button
