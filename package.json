@@ -1,6 +1,6 @@
 {
   "name": "searchstrap.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "comprehensive JavaScript sdk for search",
   "main": "src/searchstrap.js",
   "directories": {
