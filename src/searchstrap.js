@@ -39,7 +39,7 @@
         sort: 'lastModifiedDate desc',
 
         // search input builder.
-        inputBuilder: null, // it will include the summary
+        searchBoxBuilder: null, // it will include the summary
         summaryBuilder: null,
 
         // build the pagenation nav bar.
@@ -155,38 +155,6 @@
                 this.prepareSearchQuery(searchTerm, start);
             // the initial search.
             self.search(searchQuery);
-
-            // hook the click event to search button.
-            //console.log(self.settings.searchButton);
-            self.$searchButton.on('click', function() {
-                self.handleButtonClick();
-            });
-
-            // hook the key press event.
-            self.$searchInput.on('keypress', function(event) {
-
-                //console.log(event);
-                // only handle the enter key.
-                if(event.keyCode == 13) {
-                    self.handleButtonClick();
-                }
-            });
-
-            // hook the key up event for the input field.
-            self.$searchInput.on('keyup', function(event) {
-
-                self.toggleRemoveIcon();
-
-                if(self.settings.autoReload) {
-                    var term = $(this).val();
-                    if (term.length >= 0) {
-                        // prepare the query to perform 
-                        // the initial search
-                        var query = self.prepareSearchQuery(term, 1);
-                        self.search(query);
-                    }
-                }
-            });
         },
 
         /**
@@ -379,11 +347,51 @@
         },
 
         /**
-         * build the search box.
+         * build the search box and hook up events.
          */
         buildSearchBox: function() {
 
-            this.defaultSearchBox(this);
+            var self = this;
+
+            if(this.settings.searchBoxBuilder) {
+                // use the customize search box 
+                self.settings.searchBoxBuilder(self);
+            } else {
+                // using the default search box.
+                self.defaultSearchBox(self);
+            }
+
+            // hook the click event to search button.
+            //console.log(self.settings.searchButton);
+            self.$searchButton.on('click', function() {
+                self.handleButtonClick();
+            });
+
+            // hook the key press event.
+            self.$searchInput.on('keypress', function(event) {
+
+                //console.log(event);
+                // only handle the enter key.
+                if(event.keyCode == 13) {
+                    self.handleButtonClick();
+                }
+            });
+
+            // hook the key up event for the input field.
+            self.$searchInput.on('keyup', function(event) {
+
+                self.toggleRemoveIcon();
+
+                if(self.settings.autoReload) {
+                    var term = $(this).val();
+                    if (term.length >= 0) {
+                        // prepare the query to perform 
+                        // the initial search
+                        var query = self.prepareSearchQuery(term, 1);
+                        self.search(query);
+                    }
+                }
+            });
         },
 
         /**
@@ -514,7 +522,6 @@
                         facets, currentQuery);
             } else {
                 // using the default template, in file
-                // templates/2cols.js
                 $filter = self.defaultResultFilter(self, $filter,
                         facets, currentQuery);
             }
@@ -983,7 +990,7 @@
         
             // append everything together.
             $panel.append(heading).append(body);
-            $filter.append($panel);
+            $filter.html('').append($panel);
         
             return $filter;
         }
