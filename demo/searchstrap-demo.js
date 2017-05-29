@@ -56,10 +56,11 @@ $('.form-control-clear').click(function() {
         var selected = $(this).text();
         document.cookie="template=" + selected;
         // load the searchStrap plugin.
-        loadSearchStrap('#searchstrap', localSettings.searchUrl,
-                        templates[selected]);
-        $(".dropdown-menu > li.active").removeClass('active');
-        $(this).addClass('active');
+        window.location.reload();
+        //loadSearchStrap('#searchstrap', localSettings.searchUrl,
+        //                templates[selected]);
+        //$(".dropdown-menu > li.active").removeClass('active');
+        //$(this).addClass('active');
     });
 });
 
