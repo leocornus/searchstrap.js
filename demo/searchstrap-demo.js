@@ -22,6 +22,21 @@ $('.form-control-clear').click(function() {
     .trigger('propertychange').focus();
 });
 
+    // get cookie.
+    var theCookie = document.cookie;
+    theCookie = theCookie.replace(/; /g, '","');
+    theCookie = theCookie.replace(/=/g, '":"');
+    theCookie = '{"' + theCookie + '"}';
+    console.log(theCookie);
+    var cookie = JSON.parse(theCookie);
+    if(cookie.hasOwnProperty('template')) {
+        $('.dropdown-menu').find('li.active').removeClass("active");
+        var selected = cookie['template'];
+        console.log('template=' + selected);
+        $('.dropdown-menu').find('li:contains(' + selected + ')')
+                           .addClass('active');
+    }
+
     // check the template.
     //var template = buildAcronymsList;
     var template = $('.dropdown-menu').find('li.active').text();
@@ -31,11 +46,20 @@ $('.form-control-clear').click(function() {
                     templates[template]);
 
     // only for the not active items.
-    $(".dropdown-menu > li:not(.active)").
+    //$(".dropdown-menu > li:not(.active)").
+    $(".dropdown-menu > li").
         on('click', function(){
 
-        // TODO: update the logic.
-        console.log($(this).text());
+        // do nothing if it is active.
+        if($(this).hasClass("active")) return;
+
+        var selected = $(this).text();
+        document.cookie="template=" + selected;
+        // load the searchStrap plugin.
+        loadSearchStrap('#searchstrap', localSettings.searchUrl,
+                        templates[selected]);
+        $(".dropdown-menu > li.active").removeClass('active');
+        $(this).addClass('active');
     });
 });
 
