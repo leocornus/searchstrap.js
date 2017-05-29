@@ -43,6 +43,15 @@ $('.form-control-clear').click(function() {
     });
 });
 
+/**
+ * load the searchStrap plugin.
+ */
+var loadSearchStrap = function() {
+};
+
+/**
+ * the simplest result template.
+ */
 var simpleColumnBuilder = function(item) {
 
     var panel = '<div class="col-sm-3">' + 
