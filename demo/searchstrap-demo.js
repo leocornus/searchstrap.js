@@ -22,8 +22,18 @@ $('.form-control-clear').click(function() {
     .trigger('propertychange').focus();
 });
 
-    $('#searchstrap').searchStrap({
-        searchUrl: localSettings.searchUrl,
+    // load the searchStrap plugin.
+    loadSearchStrap('#searchstrap', localSettings.searchUrl,
+                    buildAcronymsList);
+});
+
+/**
+ * the utility function to load the searchStrap plugin.
+ */
+var loadSearchStrap = function(selector, url, template) {
+
+    $(selector).searchStrap({
+        searchUrl: url,
         placeholder: "This is search box place holder",
         // magic numbers: 3, 7, 19, 37
         itemsPerPage: 16,
@@ -38,15 +48,9 @@ $('.form-control-clear').click(function() {
         },
         resultSelector: '#result-list',
         //resultTemplate: buildAcronymsCircles,
-        resultTemplate: buildAcronymsList,
+        resultTemplate: template,
         autoReload: false
     });
-});
-
-/**
- * load the searchStrap plugin.
- */
-var loadSearchStrap = function() {
 };
 
 /**
