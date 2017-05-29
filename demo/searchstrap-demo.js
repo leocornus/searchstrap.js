@@ -22,10 +22,28 @@ $('.form-control-clear').click(function() {
     .trigger('propertychange').focus();
 });
 
+    // check the template.
+    //var template = buildAcronymsList;
+    var template = $('.dropdown-menu').find('li.active').text();
+
     // load the searchStrap plugin.
     loadSearchStrap('#searchstrap', localSettings.searchUrl,
-                    buildAcronymsList);
+                    templates[template]);
+
+    // only for the not active items.
+    $(".dropdown-menu > li:not(.active)").
+        on('click', function(){
+
+        // TODO: update the logic.
+        console.log($(this).text());
+    });
 });
+
+var templates = {
+    'buildAcronymsList': buildAcronymsList,
+//    'buildProfilesList': buildProfilesList,
+    'buildAcronymsCircles': buildAcronymsCircles
+};
 
 /**
  * the utility function to load the searchStrap plugin.
