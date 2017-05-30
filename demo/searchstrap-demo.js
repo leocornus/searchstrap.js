@@ -24,11 +24,15 @@ $('.form-control-clear').click(function() {
 
     // get cookie.
     var theCookie = document.cookie;
+    if(theCookie) {
     theCookie = theCookie.replace(/; /g, '","');
     theCookie = theCookie.replace(/=/g, '":"');
     theCookie = '{"' + theCookie + '"}';
     console.log(theCookie);
     var cookie = JSON.parse(theCookie);
+    } else {
+        var cookie = {};
+    }
     if(cookie.hasOwnProperty('template')) {
         $('.dropdown-menu').find('li.active').removeClass("active");
         var selected = cookie['template'];
