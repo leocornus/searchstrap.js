@@ -25,11 +25,11 @@ $('.form-control-clear').click(function() {
     // get cookie.
     var theCookie = document.cookie;
     if(theCookie) {
-    theCookie = theCookie.replace(/; /g, '","');
-    theCookie = theCookie.replace(/=/g, '":"');
-    theCookie = '{"' + theCookie + '"}';
-    console.log(theCookie);
-    var cookie = JSON.parse(theCookie);
+        theCookie = theCookie.replace(/; /g, '","');
+        theCookie = theCookie.replace(/=/g, '":"');
+        theCookie = '{"' + theCookie + '"}';
+        console.log(theCookie);
+        var cookie = JSON.parse(theCookie);
     } else {
         var cookie = {};
     }
