@@ -10,6 +10,21 @@ jQuery(document).ready(function($) {
 //    };
 //}
 
+    /**
+     * build the template drop down.
+     */
+    // get the all template names:
+    var names = Object.getOwnPropertyNames(templates);
+    var dropDown = $('.dropdown-menu');
+    dropDown.html('');
+    names.forEach(function(name, index) {
+        var theClass = index === 0 ? 'active' : '';
+        var liHtml = '<li class="' + theClass + '">' +
+                       '<a href="#">' + name + '</a>' +
+                     '</li>';
+        dropDown.append(liHtml);
+    });
+
     $('.has-clear input[type="text"]').on('input propertychange', function() {
       var $this = $(this);
       // any input will make the visible has value: true
@@ -22,7 +37,7 @@ jQuery(document).ready(function($) {
         .trigger('propertychange').focus();
     });
 
-    // get cookie.
+    // get cookie to find out the current template.
     var theCookie = document.cookie;
     if(theCookie) {
         theCookie = theCookie.replace(/; /g, '","');
@@ -33,6 +48,7 @@ jQuery(document).ready(function($) {
     } else {
         var cookie = {};
     }
+
     if(cookie.hasOwnProperty('template')) {
         $('.dropdown-menu').find('li.active').removeClass("active");
         var selected = cookie['template'];
@@ -74,7 +90,8 @@ jQuery(document).ready(function($) {
 
 var templates = {
     'buildAcronymsList': buildAcronymsList,
-//    'buildProfilesList': buildProfilesList,
+    // null will be considered as default template
+    'buildProfilesList': null,
     'buildAcronymsCircles': buildAcronymsCircles
 };
 
