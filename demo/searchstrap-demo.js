@@ -45,6 +45,9 @@ $('.form-control-clear').click(function() {
     //var template = buildAcronymsList;
     var template = $('.dropdown-menu').find('li.active').text();
 
+    // update the template label.
+    $('#template-label').html('Templates - ' + template);
+
     // load the searchStrap plugin.
     loadSearchStrap('#searchstrap', localSettings.searchUrl,
                     templates[template]);
