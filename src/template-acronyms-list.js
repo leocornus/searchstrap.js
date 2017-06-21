@@ -4,6 +4,22 @@
 var buildAcronymsList = function(strap, $result, docs, currentQuery,
                      total, currentPage, totalPages, pagination) {
 
+    return buildXColsARow(strap, $result, docs, currentQuery, total,
+                          currentPage, totalPages, pagination, 4,
+                          acronymPanelStripper);
+};
+
+//var buildAcronymsList = function(strap, $result, docs, currentQuery,
+//                     total, currentPage, totalPages, pagination) {
+//
+//    return buildXColsARow(strap, $result, docs, currentQuery, total,
+//                   currentPage, totalPages, pagination, 4,
+//                   acronymPanelStripper);
+//};
+
+var buildAcronymsListOld = function(strap, $result, docs, currentQuery,
+                     total, currentPage, totalPages, pagination) {
+
     var resultSummary = '';
     if(total > 0) {
         var end = currentQuery.start +
