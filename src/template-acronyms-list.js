@@ -4,6 +4,8 @@
 var buildAcronymsList = function(strap, $result, docs, currentQuery,
                      total, currentPage, totalPages, pagination) {
 
+    // the function buildXColsARow is defined in file 
+    // layout-x-cols-a-row.js
     return buildXColsARow(strap, $result, docs, currentQuery, total,
                           currentPage, totalPages, pagination, 4,
                           acronymPanelStripper);
