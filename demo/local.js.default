@@ -10,5 +10,14 @@
 //   $ git status --ignored
 //
 var localSettings = {
-  searchUrl: '/advancedsearch'
+};
+
+/**
+ * templates for search result.
+ */
+var templates = {
+    'buildAcronymsList': buildAcronymsList,
+    // null will be considered as default template
+    'buildProfilesList': null,
+    'buildAcronymsCircles': buildAcronymsCircles
 };

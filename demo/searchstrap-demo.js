@@ -12,6 +12,7 @@ jQuery(document).ready(function($) {
 
     /**
      * build the template drop down.
+     * available templates will be defined in file local.js
      */
     // get the all template names:
     var names = Object.getOwnPropertyNames(templates);
@@ -87,13 +88,6 @@ jQuery(document).ready(function($) {
         //$(this).addClass('active');
     });
 });
-
-var templates = {
-    'buildAcronymsList': buildAcronymsList,
-    // null will be considered as default template
-    'buildProfilesList': null,
-    'buildAcronymsCircles': buildAcronymsCircles
-};
 
 /**
  * the utility function to load the searchStrap plugin.
