@@ -10,17 +10,17 @@ jQuery(document).ready(function($) {
 //    };
 //}
 
-$('.has-clear input[type="text"]').on('input propertychange', function() {
-  var $this = $(this);
-  // any input will make the visible has value: true
-  var visible = Boolean($this.val());
-  $this.siblings('.form-control-clear').toggleClass('hidden', !visible);
-}).trigger('propertychange');
+    $('.has-clear input[type="text"]').on('input propertychange', function() {
+      var $this = $(this);
+      // any input will make the visible has value: true
+      var visible = Boolean($this.val());
+      $this.siblings('.form-control-clear').toggleClass('hidden', !visible);
+    }).trigger('propertychange');
 
-$('.form-control-clear').click(function() {
-  $(this).siblings('input[type="text"]').val('')
-    .trigger('propertychange').focus();
-});
+    $('.form-control-clear').click(function() {
+      $(this).siblings('input[type="text"]').val('')
+        .trigger('propertychange').focus();
+    });
 
     // get cookie.
     var theCookie = document.cookie;
@@ -46,7 +46,8 @@ $('.form-control-clear').click(function() {
     var template = $('.dropdown-menu').find('li.active').text();
 
     // update the template label.
-    $('#template-label').html('Templates - ' + template);
+    $('#template-label').html('Templates - <strong>' + template
+                              + '</strong>');
 
     // load the searchStrap plugin.
     loadSearchStrap('#searchstrap', localSettings.searchUrl,
