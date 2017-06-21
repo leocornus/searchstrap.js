@@ -16,8 +16,10 @@ var localSettings = {
  * templates for search result.
  */
 var templates = {
+    // first will be the default active on dropdown
     'buildAcronymsList': buildAcronymsList,
-    // null will be considered as default template
     'buildProfilesList': null,
-    'buildAcronymsCircles': buildAcronymsCircles
+    'buildAcronymsCircles': buildAcronymsCircles,
+    // null will be considered as default template
+    'default': null
 };
