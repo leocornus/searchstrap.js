@@ -101,9 +101,10 @@ var loadSearchStrap = function(selector, url, template) {
         itemsPerPage: 16,
         sort: 'lastModifiedDate desc',
         // we don't need search button here.
-        //fq: 'site: revenue AND keywords: "Staffing Announcements"',
+        fq: 'site: revenue AND keywords: "Staffing Announcements"',
+        //fq: 'site: mgcs AND keywords: "Getting to Know You"',
         //fq: 'site: wiki AND keywords: Acronyms',
-        fq: 'keywords: "User Profile"',
+        //fq: 'keywords: "User Profile"',
         //searchButton: 'sizing-addon',
         facet: {
             facetField: ['authors']
