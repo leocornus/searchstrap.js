@@ -23,30 +23,22 @@ var articlePanel = function(profile) {
     // try to remove some wiki markups.
     var desc = profile['description'];
 
-    // thumbnail panel
-    var panel =
-'<div class="thumbnail" style="border: 0px">' +
-'  <a href="' + profile['url'] + '">' +
-'  <img src="' + profile['image'] + 
-            '" class="img-circle" width=100% alt="' + 
-            profile['title'] + '"/>' +
-'  </a>' +
-'  <div class="caption">' +
-'    <h3><a href="' + profile['url'] + '">' + profile['title'] + 
-'</a></h3>' +
-'    <p>' + desc +'</p>' +
-'  </div>' +
-'</div>';
-
-    // using the pull-left try to make the text wrap around the
-    // image.
-    panel =
-'<div>' +
+    // get ready the img tag.
+    var imgTag = '';
+    if(profile['image']) {
+        // using the pull-left try to make the text wrap around the
+        // image.
+        imgTag = 
 '  <a class="pull-left" href="' + profile['url'] + '">' +
 '  <img src="' + profile['image'] + 
             '" class="img-circle" width=86 alt="' + 
             profile['title'] + '"/>' +
-'  </a>' +
+'  </a>';
+    }
+
+    var panel =
+'<div>' +
+imgTag +
 '  <div>' +
 '    <h4><a href="' + profile['url'] + '">' + profile['title'] + 
 '</a></h4>' +
