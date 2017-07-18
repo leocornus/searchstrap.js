@@ -18,7 +18,7 @@ var buildFeaturedArticles = function(strap, $result, docs, currentQuery,
  */
 var articlePanel = function(profile) {
 
-   console.log(profile);
+    //console.log(profile);
 
     // try to remove some wiki markups.
     var desc = profile['description'];
