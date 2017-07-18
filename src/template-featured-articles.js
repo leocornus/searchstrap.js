@@ -31,7 +31,8 @@ var articlePanel = function(profile) {
         imgTag = 
 '  <a class="pull-left" href="' + profile['url'] + '">' +
 '  <img src="' + profile['image'] + 
-            '" class="img-circle" width=86 alt="' + 
+//            '" class="img-circle" width=150 alt="' + 
+            '" class="img-rounded" width=150 alt="' + 
             profile['title'] + '"/>' +
 '  </a>';
     }
@@ -48,7 +49,7 @@ imgTag +
 '    <p>' + 
 //'    <span class="label label-default">' + 
 '    <span class="text-success"><strong>' + 
-modifiedDate.format("MMMM DD YYYY") + '</strong></span> - ' +
+modifiedDate.format("MMMM DD, YYYY") + '</strong></span> - ' +
      desc +'</p>' +
 '  </div>' +
 '</div>';
