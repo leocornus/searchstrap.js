@@ -46,8 +46,9 @@ imgTag +
 '    <h4><a href="' + profile['url'] + '">' + profile['title'] + 
 '</a></h4>' +
 '    <p>' + 
-'    <span class="label label-default">' + 
-modifiedDate.format("MMMM DD YYYY") + '</span> - ' +
+//'    <span class="label label-default">' + 
+'    <span class="text-success"><strong>' + 
+modifiedDate.format("MMMM DD YYYY") + '</strong></span> - ' +
      desc +'</p>' +
 '  </div>' +
 '</div>';
