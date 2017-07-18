@@ -461,17 +461,17 @@
             var pageText = $href.text();
             var nextPage = 1;
             //console.log('page = ' + pageText);
-            if(pageText.includes('First')) {
+            if(pageText.indexOf('First') >= 0) {
                 // the first page button. do nothing using 
                 // the default, start from 1
                 nextPage = 1;
-            } else if(pageText.includes('Last')) {
+            } else if(pageText.indexOf('Last') >= 0) {
                 // last page.
                 nextPage = totalPages;
-            } else if(pageText.includes('Previous')) {
+            } else if(pageText.indexOf('Previous') >= 0) {
                 // previous page.
                 nextPage = currentPage - 1;
-            } else if(pageText.includes('Next')) {
+            } else if(pageText.indexOf('Next') >= 0) {
                 // the next page.
                 nextPage = currentPage + 1;
             } else {
