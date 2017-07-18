@@ -20,6 +20,11 @@
         // query param for search term.
         queryName : 'searchterm',
 
+        /**
+         * set the default sort.
+         */
+        sort: 'lastModifiedDate desc',
+
         // options for facet, based on Solr
         // here are default facet.
         facet: {
@@ -28,15 +33,18 @@
             facetField: ['site', 'authors', 'keywords']
         },
 
-        // the filter query, using Solr query syntax.
-        // for example: "site: wiki AND keywords: Acronyms"
-        // default is empty
+        /**
+         * the filter query, using Solr query syntax.
+         * for example: "site: wiki AND keywords: Acronyms"
+         * default is empty, which will search all content.
+         */
         fq: '',
 
         /**
-         * set the default sort.
+         * the field list, a list of fields you want to get 
+         * from the search engine.
          */
-        sort: 'lastModifiedDate desc',
+        fl: 'id,title,site,url,description,conent,keywords,lastModifiedDate',
 
         // search input builder.
         searchBoxBuilder: null, // it will include the summary
@@ -218,7 +226,8 @@
                 sort: self.settings.sort,
                 // facet
                 facet: JSON.stringify(self.settings.facet),
-                fq: self.settings.fq
+                fq: self.settings.fq,
+                fl: self.settings.fl
             };
 
             $.ajax({

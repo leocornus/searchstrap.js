@@ -36,13 +36,18 @@ var articlePanel = function(profile) {
 '  </a>';
     }
 
+    // get ready the modified date.
+    var modifiedDate = profile['lastModifiedDate'];
+
     var panel =
 '<div>' +
 imgTag +
 '  <div>' +
 '    <h4><a href="' + profile['url'] + '">' + profile['title'] + 
 '</a></h4>' +
-'    <p>' + desc +'</p>' +
+'    <p>' + 
+'    <span class="label label-default">' + modifiedDate + '</span> - ' +
+     desc +'</p>' +
 '  </div>' +
 '</div>';
 
