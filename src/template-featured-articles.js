@@ -24,6 +24,8 @@ var articlePanel = function(profile) {
     var desc = profile['description'];
 
     // get ready the img tag.
+    // - set the default to empty if there is no image.
+    // - another choice is to use a default image.
     var imgTag = '';
     if(profile['image']) {
         // using the pull-left try to make the text wrap around the
@@ -32,7 +34,7 @@ var articlePanel = function(profile) {
 '  <a class="pull-left" href="' + profile['url'] + '">' +
 '  <img src="' + profile['image'] + 
 //            '" class="img-circle" width=150 alt="' + 
-            '" class="img-rounded" width=150 alt="' + 
+            '" class="img-rounded" width=200 alt="' + 
             profile['title'] + '"/>' +
 '  </a>';
     }
