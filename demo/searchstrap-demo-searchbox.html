@@ -1,0 +1,127 @@
+<html>
+  <head>
+    <title>Demo Special Search Page</title>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap-theme.min.css'/>
+    <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+    <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src='/bower_components/moment/moment.js'></script>
+
+    <script src='/src/searchstrap.js'></script>
+    <script src='/src/layout-x-cols-a-row.js'></script>
+    <script src='/src/template-acronyms-circle.js'></script>
+    <script src='/src/template-profiles-list.js'></script>
+    <script src='/src/template-acronyms-list.js'></script>
+    <script src='/src/template-featured-articles.js'></script>
+    <script src='/src/builder-advanced-searchbox.js'></script>
+
+    <script src='local.js'></script>
+    <!-- script src='searchstrap-demo.js'></script -->
+
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src='https://cdn.rawgit.com/leocornus/leocornus-visualdata/v0.0.6/src/zoomable-circles.js'></script>
+
+<style>
+/**
+ * for the input clear button.
+ */
+::-ms-clear {
+  display: none;
+}
+
+.form-control-clear {
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
+}
+  </style>
+    <script>
+// this will replace the code in controller.js
+//var simpleTest = angular.module('ssDemo', []);
+jQuery(document).ready(function($) {
+
+    $('#searchstrap').searchStrap({
+        searchUrl: localSettings.searchUrl,
+        placeholder: "This is search box place holder",
+        // magic numbers: 3, 7, 19, 37
+        itemsPerPage: 16,
+        sort: 'lastModifiedDate desc',
+        // we don't need search button here.
+        //fq: 'site: revenue AND keywords: "Staffing Announcements"',
+        //fq: 'site: mgcs AND keywords: "General"',
+        //fq: 'site: mgcs AND keywords: "Getting to Know You"',
+        //fq: 'site: iit AND keywords: "Write Right"',
+        //fq: 'site: iit AND keywords: "A Day in the Life"',
+        fq: 'site: its AND keywords: "SHOUT OUTS!"',
+        //fq: 'site: wiki AND keywords: Acronyms',
+        //fq: 'keywords: "User Profile"',
+        //searchButton: 'sizing-addon',
+        facet: {
+            facetField: ['authors']
+        },
+        resultSelector: '#result-list',
+        resultTemplate: buildAcronymsCircles,
+        autoReload: false
+    });
+
+});
+    </script>
+  </head>
+
+  <body>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron" style="padding-bottom:0px">
+      <div class="container">
+        <h1>
+          <span class="text-success">SearchStrap Demo</span>
+        </h1>
+        <p>The following is a partial list of things we try to test out!
+        </p>
+<ul class="nav nav-pills">
+  <li role="presentation" class="active"><a href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</a></li>
+  <li role="presentation"><a href="/wiki/"><span class="glyphicon glyphicon-flash" aria-hidden="true"></span> Search Tips</a></li>
+  <li role="presentation">
+    <a href=""><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Customization</a>
+  </li>
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      <span id="template-label">Templates</span> <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li class="active"><a href="#">buildAcronymsList</a></li>
+      <li><a href="#">buildProfilesList</a></li>
+      <li><a href="#">buildAcronymsCircles</a></li>
+    </ul>
+  </li>
+  <li class="pull-right" role="presentation"><a href="/wiki/"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> How we build this page</a></li>
+</ul>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Search bar -->
+      <div class="container container-fluid bg-muted">
+        <div class="row" id="search-bar">
+          <div class="col-md-4">
+            <div id="searchstrap"></div>
+          </div>
+
+          <div class="col-md-8">
+            <div id="result-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container container-fluid">
+        <hr>
+        <footer>
+          <p>&copy; 2017 Company, Inc.</p>
+        </footer>
+      </div>
+    </div> <!-- /container -->
+  </body>
+</html>
