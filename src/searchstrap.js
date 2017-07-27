@@ -125,7 +125,7 @@
 
             // build the search box.
             // TODO: make this configurable!
-            // reference Gooble search, search box will inlcue
+            // reference Google search, search box will inlcue
             // - search input box. $searchInput
             // - search button. $searchButton
             // - search result summary $searchSummary
@@ -679,20 +679,35 @@
 '  <h2>Loading...</h2>' +
 '</div>';
 
+            // replace the search box.
             strap.$element.html('').append(searchBox);
             // set up the searchInput jQuery object..
             strap.$searchInput = strap.$element.find('input');
             // set up the searchButton jQuery object
             strap.$searchButton = 
                 strap.$element.find('#search-button');
-            // set up the search summary.
+            // set up the search summary jQuery object.
             strap.$searchSummary = 
                 strap.$element.find('#search-info');
 
-            // hook the clik event on the remove icon.
+            /**
+             * hook the clik event on the remove icon.
+             * It will need the following styles to work fine on IE
+             *
+             * ::-ms-clear {
+             *   display: none;
+             * }
+             *
+             * .form-control-clear {
+             *   z-index: 10;
+             *   pointer-events: auto;
+             *   cursor: pointer;
+             * }
+             */
             strap.$element.find('.glyphicon-remove')
                 .on('click', function(event) {
 
+                // clean the search term in the input box.
                 strap.$searchInput.val('');
                 // hide the remove icon.
                 $(this).addClass('hidden');
