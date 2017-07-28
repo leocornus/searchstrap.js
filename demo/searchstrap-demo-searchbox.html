@@ -45,9 +45,9 @@ jQuery(document).ready(function($) {
 
     $('#searchstrap').searchStrap({
         searchUrl: localSettings.searchUrl,
-        placeholder: "This is search box place holder",
+        placeholder: "search decisions",
         // magic numbers: 3, 7, 19, 37
-        itemsPerPage: 61,
+        itemsPerPage: 6,
         sort: 'lastModifiedDate desc',
         // we don't need search button here.
         //fq: 'site: revenue AND keywords: "Staffing Announcements"',
@@ -64,7 +64,7 @@ jQuery(document).ready(function($) {
         },
         searchBoxBuilder: searchBoxWithDropdown,
         resultSelector: '#result-list',
-        resultTemplate: buildAcronymsCircles,
+        resultTemplate: buildFeaturedArticles,
         autoReload: false
     });
 

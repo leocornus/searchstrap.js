@@ -9,6 +9,7 @@ var searchBoxWithDropdown = function(strap) {
 '<div class="input-group input-group-lg"' +
 '     role="group" aria-label="...">' +
 '  <div class="form-group form-group-lg has-feedback has-clear">' +
+'    <label class="h3" for="search-input">Keyword Search:</label>' +
 '    <input type="text" class="form-control"' +
 '           placeholder="' + strap.settings.placeholder + '"' +
 '           id="search-input"' +
@@ -17,6 +18,34 @@ var searchBoxWithDropdown = function(strap) {
 '                 glyphicon glyphicon-remove' +
 '                 form-control-feedback hidden"></span>' +
 '  </div>' +
+'</div>' +
+'<label class="h3">Advanced Search:</label>' +
+'<div class="form-group">' +
+'  <label class="h4" for="organization-type">Organization Type</label>' +
+'  <select id="organization-type" class="form-control">' +
+'    <option></option>' +
+'    <option>Conflict of Interest Commissioner</option>' +
+'    <option>Ministry</option>' +
+'    <option>Agency</option>' +
+'  </select>' +
+'</div>' +
+'<div class="form-group">' +
+'  <label class="h4" for="ethical-matter">Type of Ethical Matter</label>' +
+'  <select id="ethical-matter" class="form-control">' +
+'    <option></option>' +
+'    <option>Conflict of Interest</option>' +
+'    <option>Political Activity</option>' +
+'    <option>Other</option>' +
+'  </select>' +
+'</div>' + 
+'<div class="form-group">' +
+'  <label class="h4" for="ethical-area">Ethical Area</label>' +
+'  <select id="ethical-area" class="form-control">' +
+'    <option></option>' +
+'    <option>Benefitting Self, Spouse or Children</option>' +
+'    <option>Dislosing Confidential Information</option>' +
+'    <option>Accepting Gifts</option>' +
+'  </select>' +
 '</div>';
 
     // replace the search box.
