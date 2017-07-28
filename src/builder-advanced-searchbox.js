@@ -6,10 +6,10 @@ var searchBoxWithDropdown = function(strap) {
 
     // build the search box.
     var searchBox = 
+'<label class="h3" for="search-input">Keyword Search:</label>' +
 '<div class="input-group input-group-lg"' +
 '     role="group" aria-label="...">' +
 '  <div class="form-group form-group-lg has-feedback has-clear">' +
-'    <label class="h3" for="search-input">Keyword Search:</label>' +
 '    <input type="text" class="form-control"' +
 '           placeholder="' + strap.settings.placeholder + '"' +
 '           id="search-input"' +
