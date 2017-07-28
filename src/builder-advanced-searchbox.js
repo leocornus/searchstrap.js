@@ -17,15 +17,6 @@ var searchBoxWithDropdown = function(strap) {
 '                 glyphicon glyphicon-remove' +
 '                 form-control-feedback hidden"></span>' +
 '  </div>' +
-'  <span class="input-group-addon" id="search-button"' +
-'        style="cursor: pointer">' +
-'    <span class="glyphicon glyphicon-search ' +
-'                 text-primary"></span> Search' +
-'  </span>' +
-'</div>' +
-// the info bar. summary of search result.
-'<div class="text-muted h4" id="search-info">' +
-'  <h2>Loading...</h2>' +
 '</div>';
 
     // replace the search box.
@@ -36,8 +27,7 @@ var searchBoxWithDropdown = function(strap) {
     strap.$searchButton = 
         strap.$element.find('#search-button');
     // set up the search summary jQuery object.
-    strap.$searchSummary = 
-        strap.$element.find('#search-info');
+    strap.$searchSummary = $('#search-info');
 
     /**
      * hook the clik event on the remove icon.

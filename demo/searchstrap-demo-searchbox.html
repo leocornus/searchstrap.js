@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
         searchUrl: localSettings.searchUrl,
         placeholder: "This is search box place holder",
         // magic numbers: 3, 7, 19, 37
-        itemsPerPage: 16,
+        itemsPerPage: 61,
         sort: 'lastModifiedDate desc',
         // we don't need search button here.
         //fq: 'site: revenue AND keywords: "Staffing Announcements"',
@@ -62,6 +62,7 @@ jQuery(document).ready(function($) {
         facet: {
             facetField: ['authors']
         },
+        searchBoxBuilder: searchBoxWithDropdown,
         resultSelector: '#result-list',
         resultTemplate: buildAcronymsCircles,
         autoReload: false
@@ -103,14 +104,15 @@ jQuery(document).ready(function($) {
 
     <div class="container">
 
-      <!-- Search bar -->
+      <!-- search box and result list in 2 columns -->
       <div class="container container-fluid bg-muted">
         <div class="row" id="search-bar">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div id="searchstrap"></div>
           </div>
 
-          <div class="col-md-8">
+          <div class="col-md-9">
+            <div class="text-muted h4" id="search-info"></div>
             <div id="result-list"></div>
           </div>
         </div>
