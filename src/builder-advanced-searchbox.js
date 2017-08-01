@@ -46,6 +46,9 @@ var searchBoxWithDropdown = function(strap) {
 '    <option>Dislosing Confidential Information</option>' +
 '    <option>Accepting Gifts</option>' +
 '  </select>' +
+'</div>' +
+'<div class="form-group">' +
+' <button type="button" class="btn btn-primary" id="search-button">Search</button>' +
 '</div>';
 
     // replace the search box.
@@ -53,8 +56,7 @@ var searchBoxWithDropdown = function(strap) {
     // set up the searchInput jQuery object..
     strap.$searchInput = strap.$element.find('input');
     // set up the searchButton jQuery object
-    strap.$searchButton = 
-        strap.$element.find('#search-button');
+    strap.$searchButton =  $('#search-button');
     // set up the search summary jQuery object.
     strap.$searchSummary = $('#search-info');
 
