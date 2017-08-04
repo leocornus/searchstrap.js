@@ -6,7 +6,8 @@ var buildFeaturedArticles = function(strap, $result, docs, currentQuery,
 
     // the function buildXColsARow is defined in file 
     // layout-x-cols-a-row.js
-    // set for 2 columns a row.
+    // set for 2 columns a row, the size of the unit panel should
+    // keep consistant with the total column.
     return buildXColsARow(strap, $result, docs, currentQuery, total,
                           currentPage, totalPages, pagination, 2,
                           articlePanel);

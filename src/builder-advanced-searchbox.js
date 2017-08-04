@@ -21,27 +21,27 @@ var searchBoxWithDropdown = function(strap) {
 '</div>' +
 '<label class="h3">Advanced Search:</label>' +
 '<div class="form-group">' +
-'  <label class="h4" for="organization-type">Organization Type</label>' +
+'  <label class="h4" for="organization-type">Source of Decision</label>' +
 '  <select id="organization-type" class="form-control">' +
-'    <option></option>' +
+'    <option>None</option>' +
 '    <option>Conflict of Interest Commissioner</option>' +
 '    <option>Ministry</option>' +
 '    <option>Agency</option>' +
 '  </select>' +
 '</div>' +
 '<div class="form-group">' +
-'  <label class="h4" for="ethical-matter">Type of Ethical Matter</label>' +
+'  <label class="h4" for="ethical-matter">Type of Matter</label>' +
 '  <select id="ethical-matter" class="form-control">' +
-'    <option></option>' +
+'    <option>None</option>' +
 '    <option>Conflict of Interest</option>' +
 '    <option>Political Activity</option>' +
 '    <option>Other</option>' +
 '  </select>' +
 '</div>' + 
 '<div class="form-group">' +
-'  <label class="h4" for="ethical-area">Ethical Area</label>' +
+'  <label class="h4" for="relevant-rule">Relevant Rule</label>' +
 '  <select id="ethical-area" class="form-control">' +
-'    <option></option>' +
+'    <option>None</option>' +
 '    <option>Benefitting Self, Spouse or Children</option>' +
 '    <option>Dislosing Confidential Information</option>' +
 '    <option>Accepting Gifts</option>' +
