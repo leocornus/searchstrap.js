@@ -45,6 +45,17 @@ var searchBoxWithDropdown = function(strap) {
 '    <option>Benefitting Self, Spouse or Children</option>' +
 '    <option>Dislosing Confidential Information</option>' +
 '    <option>Accepting Gifts</option>' +
+'    <option>Giving Preferential Treatment</option>' +
+'    <option>Hiring Family Members</option>' +
+'    <option>Engaging in Business or Undertaking</option>' +
+'    <option>Participating in Decision-making</option>' +
+'    <option>Post Service - Seeking Preferential Treatment</option>' +
+'    <option>Post Service - Disclosing Confidential Information</option>' +
+'    <option>Post Service - Restriction on Lobbying</option>' +
+'    <option>Post Service - Restriction on Employment</option>' +
+'    <option>Post Service - Switching Sides</option>' +
+'    <option>Political Activity - Specially Restricted Public Servants</option>' +
+'    <option>Political Activity - Other Public Servants</option>' +
 '  </select>' +
 '</div>' +
 '<div class="form-group">' +
