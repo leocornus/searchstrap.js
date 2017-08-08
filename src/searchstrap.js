@@ -169,7 +169,7 @@
 
             // prepare the query to perform the initial search
             var searchQuery =
-                this.prepareSearchQuery(searchTerm, start, filterQuery);
+                self.prepareSearchQuery(searchTerm, start, filterQuery);
             // the initial search.
             self.search(searchQuery);
         },
@@ -212,6 +212,8 @@
             } else if (fq === '') {
                 filterQuery = self.settings.fq;
             } else {
+                // filter query suppose to be AND!
+                // TODO: Do we need make the AND relationship configurable?
                 filterQuery = self.settings.fq + ' AND (' + fq + ')';
             }
 
@@ -286,22 +288,53 @@
          */
         updateBrowserUrl: function(searchQuery, reload) {
 
+            var self = this;
+
             var reload =
                 typeof reload === 'undefined' ? false : true;
+
+            var query = [];
+
             // Check first, if the query term is empty,
             // we don't need the query parameter!
             // build the search term parameter.
-            var query = [];
             if(searchQuery.term.length > 0) {
-                query.push(this.settings.queryName +
+                query.push(self.settings.queryName +
                     '=' + encodeURIComponent(searchQuery.term));
             }
+
+            // handle the filter query parameter.
+            if(searchQuery.filterQuery.length > 0) {
+                // get the filter query from search query.
+                var filterQuery = searchQuery.filterQuery;
+
+                // we have to check if there is a default filter query
+                // defined in the option.
+                if(self.settings.fq === '') {
+                    // -> NO default filter query:
+                    // DO NOTHING HERE! 
+                    // we could use the filter query from search query directly
+                } else {
+                    // -> Default filter query is defined.
+                    // we have to remove the default filter query.
+                    // Reference function prepareSearchQuery for details.
+                    var fts = filterQuery.split(self.settings.fq + ' AND (');
+                    console.log(fts);
+                    // remove the last char, which is ).
+                    filterQuery = fts[1].substring(0, fts[1].length - 1);
+                }
+                query.push(self.settings.fqName + '=' +
+                           encodeURIComponent(filterQuery));
+            }
+
             // add the start parameter.
             query.push('start=' + searchQuery.start);
+
+            // form the URL here.
             var url = '?' + query.join('&');
 
             // the push state will keep the url in history,
-            // so the back will remember it.
+            // so the back button of browser will remember it.
             if (reload) {
                 window.location.href = url;
             } else {
