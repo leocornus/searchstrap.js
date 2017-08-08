@@ -95,4 +95,28 @@ var searchBoxWithDropdown = function(strap) {
         // trigger search and reload page.
         strap.handleButtonClick();
     });
+
+    // hook the action for selection change.
+    // update search query for any selection change.
+    strap.$element.find('select').on('change', function(event) {
+
+        var newKeys = [];
+        $("select option:selected").each(function() {
+            var selected = $(this).val();
+            //console.log($(this).val());
+            if(selected != 'None') {
+                newKeys.push('keywords:' + selected);
+            }
+        });
+        var filterQuery = '';
+        if(newKeys.length > 0) {
+           filterQuery = newKeys.join(' AND '); 
+        }
+
+        strap.searchQuery = 
+            strap.prepareSearchQuery(strap.searchQuery.term, 1, 
+                                     filterQuery);
+        strap.updateBrowserUrl(strap.searchQuery, true);
+    });
+
 };

@@ -125,8 +125,9 @@
 
             var self = this;
 
-            // build the search box.
-            // TODO: make this configurable!
+            // build the search box first!
+            // we will need using elements in search box for 
+            // rest of the initialization.
             // reference Google search, search box will inlcue
             // - search input box. $searchInput
             // - search button. $searchButton
