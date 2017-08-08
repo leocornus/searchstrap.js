@@ -168,10 +168,11 @@
             // TODO: handle facets, sorting, etc.
 
             // prepare the query to perform the initial search
-            var searchQuery =
+            // store the searchQuery so we could use it in various cases.
+            self.searchQuery =
                 self.prepareSearchQuery(searchTerm, start, filterQuery);
             // the initial search.
-            self.search(searchQuery);
+            self.search(self.searchQuery);
         },
 
         /**
@@ -271,16 +272,20 @@
          */
         handleButtonClick : function() {
 
-            var term = this.$searchInput.val();
+            var self = this;
+
+            var term = self.$searchInput.val();
             // prepare the query to perform the initial search
             // this is a new search, reset start to 1
-            var query = this.prepareSearchQuery(term, 1);
+            //var query = this.prepareSearchQuery(term, 1);
+            self.searchQuery.term = term;
+            self.searchQuery.start = 1;
             // no need search again if we will reload the page.
             //this.search(query);
 
             // update the brwoser url to
             // reflect the search input field
-            this.updateBrowserUrl(query, true);
+            self.updateBrowserUrl(self.searchQuery, true);
         },
 
         /**
@@ -450,8 +455,10 @@
                     if (term.length >= 0) {
                         // prepare the query to perform 
                         // the initial search
-                        var query = self.prepareSearchQuery(term, 1);
-                        self.search(query);
+                        //var query = self.prepareSearchQuery(term, 1);
+                        self.searchQuery.term = term;
+                        self.searchQuery.start = 1;
+                        self.search(self.searchQuery);
                     }
                 }
             });
@@ -512,6 +519,8 @@
         handlePagination: function($href, term, currentPage,
                                    totalPages, perPage) {
 
+            var self = this;
+
             var pageText = $href.text();
             var nextPage = 1;
             //console.log('page = ' + pageText);
@@ -535,10 +544,12 @@
             var start = (nextPage - 1) * parseInt(perPage) + 1;
 
             // calculate start number to build search query.
-            var query = 
-                this.prepareSearchQuery(term, start);
-            this.search(query);
-            this.updateBrowserUrl(query);
+            //var query = 
+            //    this.prepareSearchQuery(term, start);
+            self.searchQuery.term = term;
+            self.searchQuery.start = start;
+            self.search(self.searchQuery);
+            self.updateBrowserUrl(self.searchQuery);
         },
 
         /**
