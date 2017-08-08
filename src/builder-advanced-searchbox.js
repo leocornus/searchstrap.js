@@ -71,6 +71,13 @@ var searchBoxWithDropdown = function(strap) {
     // set up the search summary jQuery object.
     strap.$searchSummary = $('#search-info');
 
+    // TODO: update the current selection states
+    // 1. get filter query from url
+    // 2. set the option selections basecd on the filter query.
+    // Assume:
+    // 1. AND relationship for all 3 select elements.
+    // 2. default will be None.
+
     /**
      * hook the clik event on the remove icon.
      * It will need the following styles to work fine on IE
