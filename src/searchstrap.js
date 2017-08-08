@@ -324,9 +324,12 @@
                     // we have to remove the default filter query.
                     // Reference function prepareSearchQuery for details.
                     var fts = filterQuery.split(self.settings.fq + ' AND (');
-                    console.log(fts);
-                    // remove the last char, which is ).
-                    filterQuery = fts[1].substring(0, fts[1].length - 1);
+                    //console.log(fts);
+                    // only handle when the pattern presents
+                    if(fts.length > 1) {
+                        // remove the last char, which is ).
+                        filterQuery = fts[1].substring(0, fts[1].length - 1);
+                    }
                 }
                 query.push(self.settings.fqName + '=' +
                            encodeURIComponent(filterQuery));
