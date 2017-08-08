@@ -19,6 +19,8 @@
         itemsPerPage: 10,
         // query param for search term.
         queryName : 'searchterm',
+        // query param for filter query.
+        fqName : 'fq',
 
         /**
          * set the default sort.
@@ -145,6 +147,7 @@
             searchTerm = decodeURIComponent(searchTerm);
             // set the initial value for input box
             self.$searchInput.val(searchTerm);
+
             // show the glyphicon remove.
             self.toggleRemoveIcon();
             // trigger the propertychange event. 
@@ -156,11 +159,17 @@
             // set the start to 1 if we could not find it.
             var start = 'start' in queryParams ?
                         queryParams['start'] : 1;
+
+            // TODO: handle filter query 
+            var filterQuery = self.settings.fqName in queryParams ?
+                              queryParams[self.settings.fqName] : '';
+            filterQuery = decodeURIComponent(filterQuery);
+
             // TODO: handle facets, sorting, etc.
 
             // prepare the query to perform the initial search
             var searchQuery =
-                this.prepareSearchQuery(searchTerm, start);
+                this.prepareSearchQuery(searchTerm, start, filterQuery);
             // the initial search.
             self.search(searchQuery);
         },
@@ -190,14 +199,26 @@
          *
          * default start item is 1, as Solr counts from 1
          */
-        prepareSearchQuery: function(term, start) {
+        prepareSearchQuery: function(term, start, fq) {
+
+            var self = this;
 
             // set the default value to 1 for start.
             var start = typeof start !== 'undefined' ? start : 1;
 
+            // merge the filter query,
+            if (self.settings.fq === '') {
+                filterQuery = fq;
+            } else if (fq === '') {
+                filterQuery = self.settings.fq;
+            } else {
+                filterQuery = self.settings.fq + ' AND (' + fq + ')';
+            }
+
             var searchQuery = {
                 term: term,
-                start: start
+                start: start,
+                filterQuery: filterQuery
             };
 
             return searchQuery;
@@ -226,7 +247,7 @@
                 sort: self.settings.sort,
                 // facet
                 facet: JSON.stringify(self.settings.facet),
-                fq: self.settings.fq,
+                fq: searchQuery.filterQuery,
                 fl: self.settings.fl
             };
 
