@@ -319,6 +319,10 @@
                     // -> NO default filter query:
                     // DO NOTHING HERE! 
                     // we could use the filter query from search query directly
+                } else if(self.settings.fq === filterQuery) {
+                    // -> the filter query is default filter.
+                    // have to set the filter query to empty.
+                    filterQuery = '';
                 } else {
                     // -> Default filter query is defined.
                     // we have to remove the default filter query.
