@@ -23,39 +23,39 @@ var searchBoxWithDropdown = function(strap) {
 '<div class="form-group">' +
 '  <label class="h4" for="relevant-rule">Relevant Rule</label>' +
 '  <select id="ethical-area" class="form-control">' +
-'    <option>None</option>' +
-'    <option>Benefitting Self, Spouse or Children</option>' +
-'    <option>Dislosing Confidential Information</option>' +
+'    <option value="None">None</option>' +
+'    <option value="Benefitting Self, Spouse or Children">Benefitting Self, Spouse or Children</option>' +
+'    <option value="Dislosing Confidential Information">Dislosing Confidential Information</option>' +
 '    <option value="Accepting Gifts">Accepting Gifts</option>' +
-'    <option>Giving Preferential Treatment</option>' +
-'    <option>Hiring Family Members</option>' +
-'    <option>Engaging in Business or Undertaking</option>' +
-'    <option>Participating in Decision-making</option>' +
-'    <option>Post Service - Seeking Preferential Treatment</option>' +
-'    <option>Post Service - Disclosing Confidential Information</option>' +
-'    <option>Post Service - Restriction on Lobbying</option>' +
-'    <option>Post Service - Restriction on Employment</option>' +
-'    <option>Post Service - Switching Sides</option>' +
-'    <option>Political Activity - Specially Restricted Public Servants</option>' +
-'    <option>Political Activity - Other Public Servants</option>' +
+'    <option value="Giving Preferential Treatment">Giving Preferential Treatment</option>' +
+'    <option value="Hiring Family Members">Hiring Family Members</option>' +
+'    <option value="Engaging in Business or Undertaking">Engaging in Business or Undertaking</option>' +
+'    <option value="Participating in Decision-making">Participating in Decision-making</option>' +
+'    <option value="Post Service - Seeking Preferential Treatment">Post Service - Seeking Preferential Treatment</option>' +
+'    <option value="Post Service - Disclosing Confidential Information">Post Service - Disclosing Confidential Information</option>' +
+'    <option value="Post Service - Restriction on Lobbying">Post Service - Restriction on Lobbying</option>' +
+'    <option value="Post Service - Restriction on Employment">Post Service - Restriction on Employment</option>' +
+'    <option value="Post Service - Switching Sides">Post Service - Switching Sides</option>' +
+'    <option value="Political Activity - Specially Restricted Public Servants">Political Activity - Specially Restricted Public Servants</option>' +
+'    <option value="Political Activity - Other Public Servants">Political Activity - Other Public Servants</option>' +
 '  </select>' +
 '</div>' +
 '<div class="form-group">' +
 '  <label class="h4" for="ethical-matter">Type of Matter</label>' +
 '  <select id="ethical-matter" class="form-control">' +
-'    <option>None</option>' +
-'    <option>Conflict of Interest</option>' +
+'    <option value="None">None</option>' +
+'    <option value="Conflict of Interest">Conflict of Interest</option>' +
 '    <option value="Political Activity">Political Activity</option>' +
-'    <option>Other</option>' +
+'    <option value="Other">Other</option>' +
 '  </select>' +
 '</div>' + 
 '<div class="form-group">' +
 '  <label class="h4" for="organization-type">Source of Decision</label>' +
 '  <select id="organization-type" class="form-control">' +
-'    <option>None</option>' +
-'    <option>Conflict of Interest Commissioner</option>' +
-'    <option>Ministry</option>' +
-'    <option>Agency</option>' +
+'    <option value="None">None</option>' +
+'    <option value="Conflict of Interest Commissioner">Conflict of Interest Commissioner</option>' +
+'    <option value="Ministry">Ministry</option>' +
+'    <option value="Agency">Agency</option>' +
 '  </select>' +
 '</div>' +
 '<div class="form-group">' +
