@@ -25,19 +25,19 @@ var searchBoxWithDropdown = function(strap) {
 '  <select id="ethical-area" class="form-control">' +
 '    <option value="None">None</option>' +
 '    <option value="Benefitting Self, Spouse or Children">Benefitting Self, Spouse or Children</option>' +
-'    <option value="Dislosing Confidential Information">Dislosing Confidential Information</option>' +
+'    <option value="Disclosing Confidential Information">Disclosing Confidential Information</option>' +
 '    <option value="Accepting Gifts">Accepting Gifts</option>' +
 '    <option value="Giving Preferential Treatment">Giving Preferential Treatment</option>' +
 '    <option value="Hiring Family Members">Hiring Family Members</option>' +
 '    <option value="Engaging in Business or Undertaking">Engaging in Business or Undertaking</option>' +
-'    <option value="Participating in Decision-making">Participating in Decision-making</option>' +
-'    <option value="Post Service - Seeking Preferential Treatment">Post Service - Seeking Preferential Treatment</option>' +
-'    <option value="Post Service - Disclosing Confidential Information">Post Service - Disclosing Confidential Information</option>' +
-'    <option value="Post Service - Restriction on Lobbying">Post Service - Restriction on Lobbying</option>' +
-'    <option value="Post Service - Restriction on Employment">Post Service - Restriction on Employment</option>' +
-'    <option value="Post Service - Switching Sides">Post Service - Switching Sides</option>' +
+'    <option value="Participaing in Decision-Making">Participating in Decision-Making</option>' +
+'    <option value="Post-Service - Seeking Preferential Treatment">Post Service - Seeking Preferential Treatment</option>' +
+'    <option value="Post-Service - Disclosing Confidential Information">Post Service - Disclosing Confidential Information</option>' +
+'    <option value="Post-Service - Restriction on Lobbying">Post Service - Restriction on Lobbying</option>' +
+'    <option value="Post-Service - Restriction on Employment">Post Service - Restriction on Employment</option>' +
+'    <option value="Post-Service - Switching Sides">Post Service - Switching Sides</option>' +
 '    <option value="Political Activity - Specially Restricted Public Servants">Political Activity - Specially Restricted Public Servants</option>' +
-'    <option value="Political Activity - Other Public Servants">Political Activity - Other Public Servants</option>' +
+'    <option value="Political Activity - All Other Public Servants">Political Activity - All Other Public Servants</option>' +
 '  </select>' +
 '</div>' +
 '<div class="form-group">' +
@@ -80,11 +80,13 @@ var searchBoxWithDropdown = function(strap) {
     var fq = strap.settings.fqName in queryParams ?
                       queryParams[strap.settings.fqName] : '';
     fq = decodeURIComponent(fq);
+    console.log(fq);
     // 2. set the option selections basecd on the filter query.
     if(fq.length > 0) {
         var theKeys = fq.split(' AND ');
         theKeys.forEach(function(key) {
-            var category = key.replace('keywords:', '');
+            var category = key.replace('keywords:', '').replace(/\\ /g, ' ');
+            console.log(category);
             var theOption = strap.$element.find('select option[value="' + 
                                                 category + '"]');
             jQuery('#' + theOption.parent().attr('id')).val(category);
@@ -123,6 +125,7 @@ var searchBoxWithDropdown = function(strap) {
         var newKeys = [];
         $("select option:selected").each(function() {
             var selected = $(this).val();
+            selected = selected.replace(/ /g, '\\ ');
             //console.log($(this).val());
             if(selected != 'None') {
                 newKeys.push('keywords:' + selected);
