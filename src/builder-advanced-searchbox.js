@@ -26,7 +26,7 @@ var searchBoxWithDropdown = function(strap) {
 '    <option>None</option>' +
 '    <option>Benefitting Self, Spouse or Children</option>' +
 '    <option>Dislosing Confidential Information</option>' +
-'    <option>Accepting Gifts</option>' +
+'    <option value="Accepting Gifts">Accepting Gifts</option>' +
 '    <option>Giving Preferential Treatment</option>' +
 '    <option>Hiring Family Members</option>' +
 '    <option>Engaging in Business or Undertaking</option>' +
@@ -45,7 +45,7 @@ var searchBoxWithDropdown = function(strap) {
 '  <select id="ethical-matter" class="form-control">' +
 '    <option>None</option>' +
 '    <option>Conflict of Interest</option>' +
-'    <option>Political Activity</option>' +
+'    <option value="Political Activity">Political Activity</option>' +
 '    <option>Other</option>' +
 '  </select>' +
 '</div>' + 
@@ -72,11 +72,24 @@ var searchBoxWithDropdown = function(strap) {
     strap.$searchSummary = $('#search-info');
 
     // TODO: update the current selection states
-    // 1. get filter query from url
-    // 2. set the option selections basecd on the filter query.
     // Assume:
     // 1. AND relationship for all 3 select elements.
     // 2. default will be None.
+    // 1. get filter query from url
+    var queryParams = strap.getUrlVars();
+    var fq = strap.settings.fqName in queryParams ?
+                      queryParams[strap.settings.fqName] : '';
+    fq = decodeURIComponent(fq);
+    // 2. set the option selections basecd on the filter query.
+    if(fq.length > 0) {
+        var theKeys = fq.split(' AND ');
+        theKeys.forEach(function(key) {
+            var category = key.replace('keywords:', '');
+            var theOption = strap.$element.find('select option[value="' + 
+                                                category + '"]');
+            jQuery('#' + theOption.parent().attr('id')).val(category);
+        });
+    }
 
     /**
      * hook the clik event on the remove icon.
