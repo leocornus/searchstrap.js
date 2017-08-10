@@ -80,13 +80,16 @@ var searchBoxWithDropdown = function(strap) {
     var fq = strap.settings.fqName in queryParams ?
                       queryParams[strap.settings.fqName] : '';
     fq = decodeURIComponent(fq);
-    console.log(fq);
+    //console.log(fq);
     // 2. set the option selections basecd on the filter query.
     if(fq.length > 0) {
         var theKeys = fq.split(' AND ');
         theKeys.forEach(function(key) {
+            // remove the keywords: prefix and 
+            // remove the backward slash (\) from the category.
+            // the value for option tag could not handle slash!
             var category = key.replace('keywords:', '').replace(/\\ /g, ' ');
-            console.log(category);
+            //console.log(category);
             var theOption = strap.$element.find('select option[value="' + 
                                                 category + '"]');
             jQuery('#' + theOption.parent().attr('id')).val(category);
@@ -125,6 +128,8 @@ var searchBoxWithDropdown = function(strap) {
         var newKeys = [];
         $("select option:selected").each(function() {
             var selected = $(this).val();
+            // add the backward slash (\) to escape whitespace.
+            // Solr query syntax required this to perform proper search.
             selected = selected.replace(/ /g, '\\ ');
             //console.log($(this).val());
             if(selected != 'None') {
