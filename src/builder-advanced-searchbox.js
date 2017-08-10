@@ -67,14 +67,15 @@ var searchBoxWithDropdown = function(strap) {
     // set up the searchInput jQuery object..
     strap.$searchInput = strap.$element.find('input');
     // set up the searchButton jQuery object
-    strap.$searchButton =  $('#search-button');
+    strap.$searchButton =  jQuery('#search-button');
     // set up the search summary jQuery object.
-    strap.$searchSummary = $('#search-info');
+    strap.$searchSummary = jQuery('#search-info');
 
-    // TODO: update the current selection states
+    // update the current selection states
     // Assume:
     // 1. AND relationship for all 3 select elements.
     // 2. default will be None.
+    // here are the steps to refresh the select options:
     // 1. get filter query from url
     var queryParams = strap.getUrlVars();
     var fq = strap.settings.fqName in queryParams ?
@@ -92,6 +93,7 @@ var searchBoxWithDropdown = function(strap) {
             //console.log(category);
             var theOption = strap.$element.find('select option[value="' + 
                                                 category + '"]');
+            // set the value for parent select tag
             jQuery('#' + theOption.parent().attr('id')).val(category);
         });
     }
@@ -116,7 +118,7 @@ var searchBoxWithDropdown = function(strap) {
         // clean the search term in the input box.
         strap.$searchInput.val('');
         // hide the remove icon.
-        $(this).addClass('hidden');
+        jQuery(this).addClass('hidden');
         // trigger search and reload page.
         strap.handleButtonClick();
     });
@@ -126,12 +128,12 @@ var searchBoxWithDropdown = function(strap) {
     strap.$element.find('select').on('change', function(event) {
 
         var newKeys = [];
-        $("select option:selected").each(function() {
-            var selected = $(this).val();
+        jQuery("select option:selected").each(function() {
+            var selected = jQuery(this).val();
             // add the backward slash (\) to escape whitespace.
             // Solr query syntax required this to perform proper search.
             selected = selected.replace(/ /g, '\\ ');
-            //console.log($(this).val());
+            //console.log(jQuery(this).val());
             if(selected != 'None') {
                 newKeys.push('keywords:' + selected);
             }
