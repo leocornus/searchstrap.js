@@ -10,6 +10,9 @@
 //   $ git status --ignored
 //
 var localSettings = {
+  searchUrl: '/advancedsearch',
+  //fq: 'keywords: "User Profile"',
+  fq: 'keywords:User\\ profile',
 };
 
 /**
@@ -19,6 +22,7 @@ var templates = {
     // first will be the default active on dropdown
     'buildAcronymsList': buildAcronymsList,
     'buildProfilesList': buildProfilesList,
+    'buildFeaturedArticles': buildFeaturedArticles,
     'buildAcronymsCircles': buildAcronymsCircles,
     // null will be considered as default template
     'default': null

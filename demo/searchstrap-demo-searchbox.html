@@ -50,15 +50,9 @@ jQuery(document).ready(function($) {
         itemsPerPage: 6,
         sort: 'lastModifiedDate desc',
         // we don't need search button here.
-        //fq: 'site: revenue AND keywords: "Staffing Announcements"',
-        //fq: 'site: mgcs AND keywords: "General"',
-        //fq: 'site: mgcs AND keywords: "Getting to Know You"',
-        //fq: 'site: iit AND keywords: "Write Right"',
-        //fq: 'site: iit AND keywords: "A Day in the Life"',
-        fq: 'site: its AND keywords: "SHOUT OUTS!"',
-        //fq: 'site: wiki AND keywords: Acronyms',
-        //fq: 'keywords: "User Profile"',
         //searchButton: 'sizing-addon',
+        // using the filter query from local settings.
+        fq: localSettings.fq,
         facet: {
             facetField: ['authors']
         },
