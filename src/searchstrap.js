@@ -277,9 +277,13 @@
 
             var term = self.$searchInput.val();
             // prepare the query to perform the initial search
-            // this is a new search, reset start to 1
             //var query = this.prepareSearchQuery(term, 1);
+            // instead of build the search query again,
+            // we just update the search term.
+            // other events might change the search query too.
             self.searchQuery.term = term;
+            // Clicking search button will consider as start a new search.
+            // reset start to 1
             self.searchQuery.start = 1;
             // no need search again if we will reload the page.
             //this.search(query);

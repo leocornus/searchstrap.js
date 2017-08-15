@@ -143,10 +143,13 @@ var searchBoxWithDropdown = function(strap) {
            filterQuery = newKeys.join(' AND '); 
         }
 
+        // update teh search query based on the filter query.
         strap.searchQuery = 
             strap.prepareSearchQuery(strap.searchQuery.term, 1, 
                                      filterQuery);
-        strap.updateBrowserUrl(strap.searchQuery, true);
+        // if we need update search result for each selection change,
+        // using the updateBrowserUrl function with reload set to true
+        //strap.updateBrowserUrl(strap.searchQuery, true);
+        // otherwise, user has to click search button to reload.
     });
-
 };
