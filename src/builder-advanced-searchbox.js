@@ -1,10 +1,10 @@
 /**
- * the default builder to build search input box
- * this will depend on Bootstrap
+ * search box builder function to build some dropdown selections 
+ * around the search box.
  */
-var searchBoxWithDropdown = function(strap) {
+var searchBoxWithDropdownEN = function(strap) {
 
-    // build the search box.
+    // build the search box in English
     var searchBox = 
 '<label class="h3" for="search-input">Keyword Search:</label>' +
 '<div class="input-group input-group-lg"' +
@@ -61,6 +61,80 @@ var searchBoxWithDropdown = function(strap) {
 '<div class="form-group">' +
 ' <button type="button" class="btn btn-primary" id="search-button">Search</button>' +
 '</div>';
+
+    searchBoxWithDropdown(strap, searchBox);
+}
+
+/**
+ * build the search box in French
+ */
+var searchBoxWithDropdownFR = function(strap) {
+
+    // build the search box in French 
+    var searchBox = 
+'<label class="h3" for="search-input">Keyword Search FR:</label>' +
+'<div class="input-group input-group-lg"' +
+'     role="group" aria-label="...">' +
+'  <div class="form-group form-group-lg has-feedback has-clear">' +
+'    <input type="text" class="form-control"' +
+'           placeholder="' + strap.settings.placeholder + '"' +
+'           id="search-input"' +
+'           aria-describedby="sizing-addon"/>' +
+'    <span class="form-control-clear text-danger' +
+'                 glyphicon glyphicon-remove' +
+'                 form-control-feedback hidden"></span>' +
+'  </div>' +
+'</div>' +
+'<label class="h3">Advanced Search FR:</label>' +
+'<div class="form-group">' +
+'  <label class="h4" for="relevant-rule">Relevant Rule</label>' +
+'  <select id="ethical-area" class="form-control">' +
+'    <option value="None">None</option>' +
+'    <option value="Benefitting Self, Spouse or Children">Benefitting Self, Spouse or Children</option>' +
+'    <option value="Disclosing Confidential Information">Disclosing Confidential Information</option>' +
+'    <option value="Accepting Gifts">Accepting Gifts</option>' +
+'    <option value="Giving Preferential Treatment">Giving Preferential Treatment</option>' +
+'    <option value="Hiring Family Members">Hiring Family Members</option>' +
+'    <option value="Engaging in Business or Undertaking">Engaging in Business or Undertaking</option>' +
+'    <option value="Participaing in Decision-Making">Participating in Decision-Making</option>' +
+'    <option value="Post-Service - Seeking Preferential Treatment">Post Service - Seeking Preferential Treatment</option>' +
+'    <option value="Post-Service - Disclosing Confidential Information">Post Service - Disclosing Confidential Information</option>' +
+'    <option value="Post-Service - Restriction on Lobbying">Post Service - Restriction on Lobbying</option>' +
+'    <option value="Post-Service - Restriction on Employment">Post Service - Restriction on Employment</option>' +
+'    <option value="Post-Service - Switching Sides">Post Service - Switching Sides</option>' +
+'    <option value="Political Activity - Specially Restricted Public Servants">Political Activity - Specially Restricted Public Servants</option>' +
+'    <option value="Political Activity - All Other Public Servants">Political Activity - All Other Public Servants</option>' +
+'  </select>' +
+'</div>' +
+'<div class="form-group">' +
+'  <label class="h4" for="ethical-matter">Type of Matter</label>' +
+'  <select id="ethical-matter" class="form-control">' +
+'    <option value="None">None</option>' +
+'    <option value="Conflict of Interest">Conflict of Interest</option>' +
+'    <option value="Political Activity">Political Activity</option>' +
+'    <option value="Other">Other</option>' +
+'  </select>' +
+'</div>' + 
+'<div class="form-group">' +
+'  <label class="h4" for="organization-type">Source of Decision</label>' +
+'  <select id="organization-type" class="form-control">' +
+'    <option value="None">None</option>' +
+'    <option value="Conflict of Interest Commissioner">Conflict of Interest Commissioner</option>' +
+'    <option value="Ministry">Ministry</option>' +
+'    <option value="Agency">Agency</option>' +
+'  </select>' +
+'</div>' +
+'<div class="form-group">' +
+' <button type="button" class="btn btn-primary" id="search-button">Search</button>' +
+'</div>';
+
+    searchBoxWithDropdown(strap, searchBox);
+}
+
+/**
+ * common function to build the search box.
+ */
+var searchBoxWithDropdown = function(strap, searchBox) {
 
     // replace the search box.
     strap.$element.html('').append(searchBox);
