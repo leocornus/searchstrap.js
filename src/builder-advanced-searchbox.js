@@ -72,7 +72,7 @@ var searchBoxWithDropdownFR = function(strap) {
 
     // build the search box in French 
     var searchBox = 
-'<label class="h3" for="search-input">Keyword Search FR:</label>' +
+'<label class="h3" for="search-input">Recherche par mot-clé:</label>' +
 '<div class="input-group input-group-lg"' +
 '     role="group" aria-label="...">' +
 '  <div class="form-group form-group-lg has-feedback has-clear">' +
@@ -85,9 +85,9 @@ var searchBoxWithDropdownFR = function(strap) {
 '                 form-control-feedback hidden"></span>' +
 '  </div>' +
 '</div>' +
-'<label class="h3">Advanced Search FR:</label>' +
+'<label class="h3">Recherche avancée:</label>' +
 '<div class="form-group">' +
-'  <label class="h4" for="relevant-rule">Relevant Rule</label>' +
+'  <label class="h4" for="relevant-rule">Régle Pertinente</label>' +
 '  <select id="ethical-area" class="form-control">' +
 '    <option value="None">None</option>' +
 '    <option value="Benefitting Self, Spouse or Children">Benefitting Self, Spouse or Children</option>' +
@@ -107,7 +107,7 @@ var searchBoxWithDropdownFR = function(strap) {
 '  </select>' +
 '</div>' +
 '<div class="form-group">' +
-'  <label class="h4" for="ethical-matter">Type of Matter</label>' +
+'  <label class="h4" for="ethical-matter">Type d`affaire</label>' +
 '  <select id="ethical-matter" class="form-control">' +
 '    <option value="None">None</option>' +
 '    <option value="Conflict of Interest">Conflict of Interest</option>' +
@@ -116,7 +116,7 @@ var searchBoxWithDropdownFR = function(strap) {
 '  </select>' +
 '</div>' + 
 '<div class="form-group">' +
-'  <label class="h4" for="organization-type">Source of Decision</label>' +
+'  <label class="h4" for="organization-type">Source de la décision</label>' +
 '  <select id="organization-type" class="form-control">' +
 '    <option value="None">None</option>' +
 '    <option value="Conflict of Interest Commissioner">Conflict of Interest Commissioner</option>' +
@@ -125,7 +125,7 @@ var searchBoxWithDropdownFR = function(strap) {
 '  </select>' +
 '</div>' +
 '<div class="form-group">' +
-' <button type="button" class="btn btn-primary" id="search-button">Search</button>' +
+' <button type="button" class="btn btn-primary" id="search-button">Chercher</button>' +
 '</div>';
 
     searchBoxWithDropdown(strap, searchBox);
