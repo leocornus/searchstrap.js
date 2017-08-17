@@ -17,6 +17,7 @@
     <script src='/src/template-acronyms-list.js'></script>
     <script src='/src/template-featured-articles.js'></script>
     <script src='/src/builder-advanced-searchbox.js'></script>
+    <script src='/src/builder-searchsummary.js'></script>
 
     <script src='local.js'></script>
     <!-- script src='searchstrap-demo.js'></script -->
@@ -57,6 +58,7 @@ jQuery(document).ready(function($) {
             facetField: ['authors']
         },
         searchBoxBuilder: searchBoxWithDropdownFR,
+        summaryBuilder: defaultSearchSummaryFR,
         resultSelector: '#result-list',
         resultTemplate: buildFeaturedArticles,
         autoReload: false

@@ -401,6 +401,7 @@
             var searchSummary = 
                 self.buildSearchSummary(currentQuery, total,
                                         currentPage, totalPages);
+            //console.log(searchSummary);
             self.$searchSummary.html(searchSummary);
 
             // build the result list panel.
@@ -506,10 +507,12 @@
 
             var summary = '';
 
-            if(this.settings.summaryBuilder) {
+            if(self.settings.summaryBuilder) {
+                //console.log(self.settings.summaryBuilder);
                 // use the customize search box 
                 summary = self.settings.summaryBuilder(self, currentQuery,
                     total, currentPage, totalPages);
+                //console.log(summary);
             } else {
                 // using the default search box.
                 summary = self.defaultSearchSummary(self, currentQuery, 
