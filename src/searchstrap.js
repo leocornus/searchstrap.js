@@ -49,7 +49,8 @@
         fl: 'id,title,site,url,description,content,keywords,lastModifiedDate',
 
         // search input builder.
-        searchBoxBuilder: null, // it will include the summary
+        searchBoxBuilder: null, // it may include the summary
+        // builder function for search summary
         summaryBuilder: null,
 
         // build the pagenation nav bar.
@@ -501,10 +502,19 @@
         buildSearchSummary: function(currentQuery, total, 
                                      currentPage, totalPages) {
 
-            // TODO: add the configurable logic.
-            var summary = 
-                this.defaultSearchSummary(currentQuery, total,
-                                          currentPage, totalPages);
+            var self = this;
+
+            var summary = '';
+
+            if(this.settings.summaryBuilder) {
+                // use the customize search box 
+                summary = self.settings.summaryBuilder(self, currentQuery,
+                    total, currentPage, totalPages);
+            } else {
+                // using the default search box.
+                summary = self.defaultSearchSummary(self, currentQuery, 
+                    total, currentPage, totalPages);
+            }
 
             return summary;
         },
@@ -975,7 +985,7 @@
         /**
          * the default search summary.
          */
-        defaultSearchSummary: function(currentQuery, total,
+        defaultSearchSummary: function(strap, currentQuery, total,
                                        currentPage, totalPages) {
             //
             var resultSummary = '';
