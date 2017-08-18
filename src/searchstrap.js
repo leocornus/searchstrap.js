@@ -859,8 +859,8 @@
          * build the default pagination with ... and 
          * without First and Last button.
          */
-        defaultPaginationDots: function(strap, currentPage,
-                totalPages, surroundingPages, tailingPages) {
+        defaultPaginationDots: function(strap, currentPage, totalPages,
+                    surroundingPages, tailingPages, labels) {
 
             // set default value for surrouning and tailing pages.
             var surroundingPages = 
@@ -870,6 +870,11 @@
                 typeof tailingPages !== 'undefined' ?
                 tailingPages : 2;
 
+            // set default labels, in English.
+            var labels =  typeof labels !== 'undefined' ? labels :
+                {'previous' : '&laquo; Previous',
+                 'next' : 'Next &raquo;'};
+
             var pagination = '<nav class="text-center">' +
                              '<ul class="pagination"' +
                              '    style="cursor: pointer">';
@@ -877,9 +882,9 @@
             var thePage = '';
             // decide the previous page button
             if(currentPage !== 1) {
-                thePage = this.buildAPage('&laquo; Previous');
+                thePage = this.buildAPage(labels.previous);
             } else {
-                thePage = this.buildAPage('&laquo; Previous', 'disabled');
+                thePage = this.buildAPage(labels.previous, 'disabled');
             }
             pagination = pagination + thePage;
 
@@ -955,9 +960,9 @@
 
             // decide the next page button.
             if(currentPage !== totalPages) { 
-                thePage = this.buildAPage('Next &raquo;');
+                thePage = this.buildAPage(labels.next);
             } else {
-                thePage = this.buildAPage('Next &raquo;', 'disabled');
+                thePage = this.buildAPage(labels.next, 'disabled');
             }
             pagination = pagination + thePage;
 
