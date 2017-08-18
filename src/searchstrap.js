@@ -563,11 +563,11 @@
             } else if(pageText.indexOf('Last') >= 0) {
                 // last page.
                 nextPage = totalPages;
-            } else if(pageText.indexOf('Previous') >= 0) {
-                // previous page.
+            } else if(pageText.indexOf('«') >= 0) {
+                // previous page. &laquo;
                 nextPage = currentPage - 1;
-            } else if(pageText.indexOf('Next') >= 0) {
-                // the next page.
+            } else if(pageText.indexOf('»') >= 0) {
+                // the next page. &raquo;
                 nextPage = currentPage + 1;
             } else {
                 // get what user selected.
@@ -860,7 +860,7 @@
          * without First and Last button.
          */
         defaultPaginationDots: function(strap, currentPage, totalPages,
-                    surroundingPages, tailingPages, labels) {
+                    labels, surroundingPages, tailingPages) {
 
             // set default value for surrouning and tailing pages.
             var surroundingPages = 
