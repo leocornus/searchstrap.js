@@ -50,6 +50,7 @@
 
         // search input builder.
         searchBoxBuilder: null, // it may include the summary
+
         // builder function for search summary
         summaryBuilder: null,
 
@@ -529,11 +530,17 @@
         buildPagination: function(currentPage, totalPages) {
 
             var self = this;
+            var pagination = '';
 
-            // TODO: add configurable logic!
-            var pagination = 
-                self.defaultPaginationDots(self, 
+            if(self.settings.paginationBuilder) {
+                // use the customize pagination builder
+                pagination = self.settings.paginationBuilder(self,
                                            currentPage, totalPages);
+            } else {
+                // using the default pagination builder.
+                pagination = self.defaultPaginationDots(self, 
+                                           currentPage, totalPages);
+            }
 
             return pagination;
         },
