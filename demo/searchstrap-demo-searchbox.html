@@ -18,6 +18,7 @@
     <script src='/src/template-featured-articles.js'></script>
     <script src='/src/builder-advanced-searchbox.js'></script>
     <script src='/src/builder-searchsummary.js'></script>
+    <script src='/src/builder-pagination.js'></script>
 
     <script src='local.js'></script>
     <!-- script src='searchstrap-demo.js'></script -->
@@ -59,6 +60,7 @@ jQuery(document).ready(function($) {
         },
         searchBoxBuilder: searchBoxWithDropdownFR,
         summaryBuilder: defaultSearchSummaryFR,
+        paginationBuilder: defaultPaginationDotsFR,
         resultSelector: '#result-list',
         resultTemplate: buildFeaturedArticles,
         autoReload: false
