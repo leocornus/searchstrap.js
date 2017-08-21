@@ -373,7 +373,7 @@
             var self = this;
 
             // log the data for debuging...
-            console.log(data);
+            //console.log(data);
 
             // save the current query, we need it for next page.
             var currentQuery = data.currentQuery;
