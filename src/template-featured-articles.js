@@ -43,7 +43,7 @@
         }
     
         // get ready the modified date.
-        var modifiedDate = moment(profile['creationDate']);
+        var modifiedDate = moment(profile['creationDate']).locale('fr-ca');
     
         var panel =
     '<div>' +
