@@ -12,16 +12,16 @@
     <script src='/bower_components/moment/locale/fr-ca.js'></script>
 
     <script src='/src/searchstrap.js'></script>
-    <script src='/src/layout-x-cols-a-row.js'></script>
+    <!-- script src='/src/layout-x-cols-a-row.js'></script>
     <script src='/src/template-acronyms-circle.js'></script>
     <script src='/src/template-profiles-list.js'></script>
     <script src='/src/template-acronyms-list.js'></script>
     <script src='/src/template-featured-articles.js'></script>
     <script src='/src/builder-advanced-searchbox.js'></script>
     <script src='/src/builder-searchsummary.js'></script>
-    <script src='/src/builder-pagination.js'></script>
+    <script src='/src/builder-pagination.js'></script -->
 
-    <!-- script src='bundle.js'></script -->
+    <script src='defaultTemplates.js'></script>
 
     <script src='local.js'></script>
     <!-- script src='searchstrap-demo.js'></script -->
@@ -66,7 +66,7 @@ jQuery(document).ready(function($) {
         summaryBuilder: defaultSearchSummaryFR,
         paginationBuilder: defaultPaginationDotsFR,
         resultSelector: '#result-list',
-        resultTemplate: buildFeaturedArticles,
+        resultTemplate: buildFeaturedArticlesFR,
         autoReload: false
     });
 

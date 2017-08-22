@@ -74,7 +74,7 @@
     
         // build the search box in French 
         var searchBox = 
-    '<label class="h3" for="search-input">Recherche par mot-clé:</label>' +
+    '<label class="h3" for="search-input">Recherche par<br/>mot-clé:</label>' +
     '<div class="input-group input-group-lg"' +
     '     role="group" aria-label="...">' +
     '  <div class="form-group form-group-lg has-feedback has-clear">' +
@@ -127,7 +127,7 @@
     '  </select>' +
     '</div>' +
     '<div class="form-group">' +
-    ' <button type="button" class="btn btn-primary" id="search-button">Chercher</button>' +
+    ' <button type="button" class="btn btn-primary" id="search-button">Recherche</button>' +
     '</div>';
     
         searchBoxWithDropdown(strap, searchBox);
