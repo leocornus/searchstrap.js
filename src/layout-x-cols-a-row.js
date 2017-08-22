@@ -5,7 +5,7 @@
     var buildXColsARow = function(strap, $result, docs, currentQuery,
                          total, currentPage, totalPages, pagination,
                          cols, panelBuilder) {
-    
+
         // build a 6 columns to show 
         $result.html("");
     
