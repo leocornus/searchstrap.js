@@ -14,7 +14,7 @@
                               currentPage, totalPages, pagination, 2,
                               articlePanel);
     };
-    
+
     /**
      * builder function to build the user profile by using the 
      * Bootstrap thumbnail.
@@ -43,7 +43,7 @@
         }
     
         // get ready the modified date.
-        var modifiedDate = moment(profile['lastModifiedDate']);
+        var modifiedDate = moment(profile['creationDate']);
     
         var panel =
     '<div>' +

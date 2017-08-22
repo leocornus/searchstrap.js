@@ -52,11 +52,12 @@ jQuery(document).ready(function($) {
         placeholder: "search decisions",
         // magic numbers: 3, 7, 19, 37
         itemsPerPage: 6,
-        sort: 'lastModifiedDate desc',
+        sort: 'creationDate desc',
         // we don't need search button here.
         //searchButton: 'sizing-addon',
         // using the filter query from local settings.
         fq: localSettings.fq,
+        //fl: 'id,title,site,url,description,content,keywords,lastModifiedDate,creationDate',
         facet: {
             facetField: ['authors']
         },

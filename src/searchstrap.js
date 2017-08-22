@@ -46,7 +46,7 @@
          * the field list, a list of fields you want to get 
          * from the search engine.
          */
-        fl: 'id,title,site,url,description,content,keywords,lastModifiedDate',
+        fl: 'id,title,site,url,description,content,keywords,lastModifiedDate,creationDate',
 
         // search input builder.
         searchBoxBuilder: null, // it may include the summary
