@@ -3,7 +3,7 @@ const path = require('path');
 var glob = require('glob');
 var templates = glob.sync('./src/@(template|layout|builder)*.js');
 templates.push('./bower_components/moment/moment.js');
-templates.push('./bower_components/moment/local/fr-ca.js');
+templates.push('./bower_components/moment/locale/fr-ca.js');
 
 module.exports = {
 

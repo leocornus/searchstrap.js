@@ -1,27 +1,59 @@
 ;(function() {
 
     /**
-     * build the Acronyms list, which will have 6 columns
+     * build featured Article list in English, the default language.
      */
     var buildFeaturedArticles = function(strap, $result, docs, currentQuery,
                          total, currentPage, totalPages, pagination) {
-    
-        // the function buildXColsARow is defined in file 
+
+        // the function buildXColsARow is defined in file
         // layout-x-cols-a-row.js
         // set for 2 columns a row, the size of the unit panel should
         // keep consistant with the total column.
         return buildXColsARow(strap, $result, docs, currentQuery, total,
                               currentPage, totalPages, pagination, 2,
-                              articlePanel);
+                              articlePanelEN);
+    };
+
+    /**
+     * build featured article list in French.
+     */
+    var buildFeaturedArticlesFR = function(strap, $result, docs, currentQuery,
+                         total, currentPage, totalPages, pagination) {
+
+        // the function buildXColsARow is defined in file
+        // layout-x-cols-a-row.js
+        // set for 2 columns a row, the size of the unit panel should
+        // keep consistant with the total column.
+        return buildXColsARow(strap, $result, docs, currentQuery, total,
+                              currentPage, totalPages, pagination, 2,
+                              articlePanelFR);
+    };
+
+    /**
+     * English panel.
+     */
+    var articlePanelEN = function(profile) {
+
+        return articlePanel(profile, 'en');
+    };
+
+    /**
+     * french panel.
+     */
+    var articlePanelFR = function(profile) {
+
+        return articlePanel(profile, 'fr-ca');
     };
 
     /**
      * builder function to build the user profile by using the 
      * Bootstrap thumbnail.
      */
-    var articlePanel = function(profile) {
+    var articlePanel = function(profile, i18n) {
     
         //console.log(profile);
+        var i18n = typeof i18n !== 'undefined' ? i18n: 'en';
     
         // try to remove some wiki markups.
         var desc = profile['description'];
@@ -43,7 +75,7 @@
         }
     
         // get ready the modified date.
-        var modifiedDate = moment(profile['creationDate']).locale('fr-ca');
+        var modifiedDate = moment(profile['creationDate']).locale(i18n);
     
         var panel =
     '<div>' +
@@ -64,6 +96,7 @@
     
         return panel;
     };
-    
+
     window.buildFeaturedArticles = buildFeaturedArticles;
+    window.buildFeaturedArticlesFR = buildFeaturedArticlesFR;
 }());
