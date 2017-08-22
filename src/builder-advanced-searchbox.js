@@ -91,39 +91,39 @@
     '<div class="form-group">' +
     '  <label class="h4" for="relevant-rule">Régle Pertinente</label>' +
     '  <select id="ethical-area" class="form-control">' +
-    '    <option value="None">None</option>' +
-    '    <option value="Benefitting Self, Spouse or Children">Benefitting Self, Spouse or Children</option>' +
-    '    <option value="Disclosing Confidential Information">Disclosing Confidential Information</option>' +
-    '    <option value="Accepting Gifts">Accepting Gifts</option>' +
-    '    <option value="Giving Preferential Treatment">Giving Preferential Treatment</option>' +
-    '    <option value="Hiring Family Members">Hiring Family Members</option>' +
-    '    <option value="Engaging in Business or Undertaking">Engaging in Business or Undertaking</option>' +
-    '    <option value="Participaing in Decision-Making">Participating in Decision-Making</option>' +
-    '    <option value="Post-Service - Seeking Preferential Treatment">Post Service - Seeking Preferential Treatment</option>' +
-    '    <option value="Post-Service - Disclosing Confidential Information">Post Service - Disclosing Confidential Information</option>' +
-    '    <option value="Post-Service - Restriction on Lobbying">Post Service - Restriction on Lobbying</option>' +
-    '    <option value="Post-Service - Restriction on Employment">Post Service - Restriction on Employment</option>' +
-    '    <option value="Post-Service - Switching Sides">Post Service - Switching Sides</option>' +
-    '    <option value="Political Activity - Specially Restricted Public Servants">Political Activity - Specially Restricted Public Servants</option>' +
-    '    <option value="Political Activity - All Other Public Servants">Political Activity - All Other Public Servants</option>' +
+    '    <option value="None">Aucune</option>' +
+    '    <option value="Benefitting Self, Spouse or Children">Interdiction de conférer un avantage</option>' +
+    '    <option value="Accepting Gifts">Interdiction d`accepter de dons</option>' +
+    '    <option value="Disclosing Confidential Information">Divulgation de renseighements confidentiels</option>' +
+    '    <option value="Giving Preferential Treatment">Traitement préférentiel</option>' +
+    '    <option value="Hiring Family Members">Embauche de membres de la famille</option>' +
+    '    <option value="Engaging in Business or Undertaking">Exercice d`une activité</option>' +
+    '    <option value="Participaing in Decision-Making">Participation à la prise de décision</option>' +
+    '    <option value="Post-Service - Seeking Preferential Treatment">Aprés l`emploi - Interdiction de solliciter un traitement préférentiel</option>' +
+    '    <option value="Post-Service - Disclosing Confidential Information">Aprés l`emploi - Divulgation de renseignements confidentiels</option>' +
+    '    <option value="Post-Service - Restriction on Lobbying">Aprés l`emploi - Interdiction d`exercer des pressions</option>' +
+    '    <option value="Post-Service - Restriction on Employment">Aprés l`emploi - Restriction en ce qui concerne l`emploi</option>' +
+    '    <option value="Post-Service - Switching Sides">Aprés l`emploi - Changement de camp</option>' +
+    '    <option value="Political Activity - Specially Restricted Public Servants">Activités politiques - Fonctionnaires faisant l`objet de restrictions particuliéres</option>' +
+    '    <option value="Political Activity - All Other Public Servants">Activités politiques - Tous les autres fonctionnaires</option>' +
     '  </select>' +
     '</div>' +
     '<div class="form-group">' +
     '  <label class="h4" for="ethical-matter">Type d`affaire</label>' +
     '  <select id="ethical-matter" class="form-control">' +
-    '    <option value="None">None</option>' +
-    '    <option value="Conflict of Interest">Conflict of Interest</option>' +
-    '    <option value="Political Activity">Political Activity</option>' +
-    '    <option value="Other">Other</option>' +
+    '    <option value="None">Aucune</option>' +
+    '    <option value="Conflict of Interest">Conflit d`intérêts</option>' +
+    '    <option value="Political Activity">Activités politiques</option>' +
+    '    <option value="Other">Autre</option>' +
     '  </select>' +
     '</div>' + 
     '<div class="form-group">' +
     '  <label class="h4" for="organization-type">Source de la décision</label>' +
     '  <select id="organization-type" class="form-control">' +
-    '    <option value="None">None</option>' +
-    '    <option value="Conflict of Interest Commissioner">Conflict of Interest Commissioner</option>' +
-    '    <option value="Ministry">Ministry</option>' +
-    '    <option value="Agency">Agency</option>' +
+    '    <option value="None">Aucune</option>' +
+    '    <option value="Conflict of Interest Commissioner">Commissaire aux conflits d`intérêts</option>' +
+    '    <option value="Ministry">Ministére</option>' +
+    '    <option value="Agency">Organisme</option>' +
     '  </select>' +
     '</div>' +
     '<div class="form-group">' +
