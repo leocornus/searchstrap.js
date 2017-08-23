@@ -1,3 +1,7 @@
+// the node.js way to load dependences.
+// webpack will pack the moment.js lib automatically
+import moment from 'moment';
+
 ;(function() {
 
     /**
