@@ -42,6 +42,15 @@
   pointer-events: auto;
   cursor: pointer;
 }
+/* Note: Try to remove the following lines to see the effect of CSS positioning */
+  .affix {
+      top: 0;
+      width: 100%;
+  }
+
+  /*.affix + .container-fluid {
+  //    padding-top: 70px;
+  //}*/
   </style>
     <script>
 // this will replace the code in controller.js
@@ -52,7 +61,7 @@ jQuery(document).ready(function($) {
         searchUrl: localSettings.searchUrl,
         placeholder: "search decisions",
         // magic numbers: 3, 7, 19, 37
-        itemsPerPage: 6,
+        itemsPerPage: 66,
         sort: 'creationDate desc',
         // we don't need search button here.
         //searchButton: 'sizing-addon',
@@ -110,7 +119,7 @@ jQuery(document).ready(function($) {
       <div class="container container-fluid bg-muted">
         <div class="row" id="search-bar">
           <div class="col-md-3" style="padding-right:20px; border-right: 2px solid #ccc;">
-            <div id="searchstrap"></div>
+            <div id="searchstrap" data-spy="affix" data-offset-top="220" data-offset-buttom="200"></div>
           </div>
 
           <div class="col-md-9">
