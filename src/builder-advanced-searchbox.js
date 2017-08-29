@@ -93,26 +93,26 @@
     '  <select id="ethical-area" class="form-control">' +
     '    <option value="None">Aucune</option>' +
     '    <option value="Interdiction de conférer un avantage">Interdiction de conférer un avantage</option>' +
-    '    <option value="Interdiction d`accepter de dons">Interdiction d`accepter de dons</option>' +
-    '    <option value="Divulgation de renseighements confidentiels">Divulgation de renseighements confidentiels</option>' +
+    '    <option value="Interdiction d’accepter de dons">Interdiction d’accepter de dons</option>' +
+    '    <option value="Divulgation de renseignements confidentiels">Divulgation de renseignements confidentiels</option>' +
     '    <option value="Traitement préférentiel">Traitement préférentiel</option>' +
     '    <option value="Embauche de membres de la famille">Embauche de membres de la famille</option>' +
-    '    <option value="Exercice d`une activité">Exercice d`une activité</option>' +
+    '    <option value="Exercice d’une activité">Exercice d’une activité</option>' +
     '    <option value="Participation à la prise de décision">Participation à la prise de décision</option>' +
-    '    <option value="Aprés l`emploi - Interdiction de solliciter un traitement préférentiel">Aprés l`emploi - Interdiction de solliciter un traitement préférentiel</option>' +
-    '    <option value="Aprés l`emploi - Divulgation de renseignements confidentiels">Aprés l`emploi - Divulgation de renseignements confidentiels</option>' +
-    '    <option value="Aprés l`emploi - Interdiction d`exercer des pressions">Aprés l`emploi - Interdiction d`exercer des pressions</option>' +
-    '    <option value="Aprés l`emploi - Restriction en ce qui concerne l`emploi">Aprés l`emploi - Restriction en ce qui concerne l`emploi</option>' +
-    '    <option value="Aprés l`emploi - Changement de camp">Aprés l`emploi - Changement de camp</option>' +
-    '    <option value="Activités politiques - Fonctionnaires faisant l`objet de restrictions particuliéres">Activités politiques - Fonctionnaires faisant l`objet de restrictions particuliéres</option>' +
-    '    <option value="Activités politiques - Tous les autres fonctionnaires">Activités politiques - Tous les autres fonctionnaires</option>' +
+    '    <option value="Après l’emploi – Interdiction de solliciter un traitement préférentiel">Après l’emploi – Interdiction de solliciter un traitement préférentiel</option>' +
+    '    <option value="Après l’emploi – Divulgation de renseignements confidentiels">Après l’emploi – Divulgation de renseignements confidentiels</option>' +
+    '    <option value="Après l’emploi – Interdiction d’exercer des pressions">Après l’emploi – Interdiction d’exercer des pressions</option>' +
+    '    <option value="Après l’emploi – Restriction en ce qui concerne l’emploi">Après l’emploi – Restriction en ce qui concerne l’emploi</option>' +
+    '    <option value="Après l’emploi – Changement de camp">Après l’emploi – Changement de camp</option>' +
+    '    <option value="Activités politiques – Fonctionnaires faisant l’objet de restrictions particulières">Activités politiques – Fonctionnaires faisant l’objet de restrictions particulières</option>' +
+    '    <option value="Activités politiques – Tous les autres fonctionnaires">Activités politiques – Tous les autres fonctionnaires</option>' +
     '  </select>' +
     '</div>' +
     '<div class="form-group">' +
-    '  <label class="h4" for="ethical-matter">Type d`affaire</label>' +
+    '  <label class="h4" for="ethical-matter">Type d’affaire</label>' +
     '  <select id="ethical-matter" class="form-control">' +
     '    <option value="None">Aucune</option>' +
-    '    <option value="Conflit d`intérêts">Conflit d`intérêts</option>' +
+    '    <option value="Conflit d’intérêts">Conflit d’intérêts</option>' +
     '    <option value="Activités politiques">Activités politiques</option>' +
     '    <option value="Autre">Autre</option>' +
     '  </select>' +
@@ -121,9 +121,9 @@
     '  <label class="h4" for="organization-type">Source de la décision</label>' +
     '  <select id="organization-type" class="form-control">' +
     '    <option value="None">Aucune</option>' +
-    '    <option value="Commissaire aux conflits d`intérêts">Commissaire aux conflits d`intérêts</option>' +
-    '    <option value="Ministére">Ministére</option>' +
-    '    <option value="Organisme">Organisme</option>' +
+    '    <option value="Commissaire aux conflit d’intérêts">Commissaire aux conflit d’intérêts</option>' +
+    '    <option value="Ministère">Ministère</option>' +
+    '    <option value="Organisme public">Organisme public</option>' +
     '  </select>' +
     '</div>' +
     '<div class="form-group">' +
