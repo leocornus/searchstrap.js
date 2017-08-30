@@ -57,12 +57,17 @@
     '    <option value="None">None</option>' +
     '    <option value="Conflict of Interest Commissioner">Conflict of Interest Commissioner</option>' +
     '    <option value="Ministry">Ministry</option>' +
-    '    <option value="Agency">Agency</option>' +
+    '    <option value="Public Body">Public Body</option>' +
     '  </select>' +
     '</div>' +
     '<div class="form-group">' +
     ' <button type="button" class="btn btn-primary" id="search-button">Search</button>' +
-    '</div>';
+    '</div>' +
+    '<ul class="list-group h6">' +
+    '  <li class="list-group-item"><strong>C</strong> - Conflict of Interest Commissioner</li>' +
+    '  <li class="list-group-item"><strong>M</strong> - Ministry</li>' +
+    '  <li class="list-group-item"><strong>P</strong> - Public Body</li>' +
+    '</ul>';
     
         searchBoxWithDropdown(strap, searchBox);
     }
@@ -128,7 +133,12 @@
     '</div>' +
     '<div class="form-group">' +
     ' <button type="button" class="btn btn-primary" id="search-button">Recherche</button>' +
-    '</div>';
+    '</div>' +
+    '<ul class="list-group h6">' +
+    '  <li class="list-group-item"><strong>C</strong> - Commissaire</li>' +
+    '  <li class="list-group-item"><strong>M</strong> - Ministère</li>' +
+    '  <li class="list-group-item"><strong>P</strong> - Organisme public</li>' +
+    '</ul>';
     
         searchBoxWithDropdown(strap, searchBox);
     }
