@@ -137,7 +137,7 @@
     '<ul class="list-group h6">' +
     '  <li class="list-group-item"><strong>C</strong> - Commissaire</li>' +
     '  <li class="list-group-item"><strong>M</strong> - Ministère</li>' +
-    '  <li class="list-group-item"><strong>P</strong> - Organisme public</li>' +
+    '  <li class="list-group-item"><strong>O</strong> - Organisme public</li>' +
     '</ul>';
     
         searchBoxWithDropdown(strap, searchBox);
