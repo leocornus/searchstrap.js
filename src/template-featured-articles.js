@@ -79,7 +79,7 @@ import moment from 'moment';
         }
     
         // get ready the modified date.
-        var modifiedDate = moment(profile['creationDate']).locale(i18n);
+        //var modifiedDate = moment(profile['creationDate']).locale(i18n);
     
         var panel =
     '<div>' +
@@ -89,8 +89,8 @@ import moment from 'moment';
     '</a></h4>' +
     '    <p>' + 
     //'    <span class="label label-default">' + 
-    '    <span class="text-success"><strong>' + 
-    modifiedDate.format("MMMM DD, YYYY") + '</strong></span> - ' +
+    //'    <span class="text-success"><strong>' + 
+    //modifiedDate.format("MMMM DD, YYYY") + '</strong></span> - ' +
          desc +'</p>' +
     '  </div>' +
     '</div>';
